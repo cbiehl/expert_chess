@@ -1666,12 +1666,18 @@
 		font-weight: 600;
 		margin: 0 0 1em 0;
 	}
-
+/*gunter start*/
+	#contactForm{
+		margin: auto;
+		max-width: 50%;
+	}
+	
 	input[type="text"],
 	input[type="password"],
 	input[type="email"],
 	select,
-	textarea {
+	textarea
+	{
 		-moz-appearance: none;
 		-webkit-appearance: none;
 		-ms-appearance: none;
@@ -1680,13 +1686,15 @@
 		border-radius: 3px;
 		border: none;
 		color: inherit;
+		margin: auto;
 		display: block;
 		outline: 0;
 		padding: 0 1em;
 		text-decoration: none;
 		width: 100%;
+		margin-bottom: 1em;
 	}
-
+	
 		input[type="text"]:invalid,
 		input[type="password"]:invalid,
 		input[type="email"]:invalid,
@@ -1703,6 +1711,7 @@
 			box-shadow: 0 0 0 2px #21b2a6;
 		}
 
+/*gunter end*/
 	.select-wrapper {
 		text-decoration: none;
 		display: block;
@@ -1875,7 +1884,7 @@
 		border-bottom: none;
 		position: relative;
 	}
-
+	
 		.icon:before {
 			-moz-osx-font-smoothing: grayscale;
 			-webkit-font-smoothing: antialiased;
@@ -3706,7 +3715,7 @@
 	}
 
 		#footer .icons {
-			font-size: 1.25em;
+			font-size: 1.25em;			
 		}
 
 			#footer .icons a {
