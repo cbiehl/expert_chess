@@ -1931,15 +1931,15 @@
 			}
 
 		.icon.style1 {
-			color: #00ffcc;
+			color: #00b33c;
 		}
 
 		.icon.style2 {
-			color: #00f0ff;
+			color: #00b33c;
 		}
 
 		.icon.style3 {
-			color: #76ddff;
+			color: #00e64d;
 		}
 
 /* Image */
@@ -2177,7 +2177,7 @@
 		}
 
 			table tbody tr:nth-child(2n + 1) {
-				background-color: rgba(144, 144, 144, 0.25);
+				background-color: rgba(144, 144, 144, 0.25)
 			}
 
 		table td {
@@ -2437,7 +2437,7 @@
 
 			.features li:before {
 				display: block;
-				color: #00ffcc;
+				color: #1ed909;
 				position: absolute;
 				left: 1.75em;
 				top: 2.75em;
@@ -2808,7 +2808,7 @@
 		}
 
 		.wrapper.style3 {
-			background-color: #505393;
+			background-color: transparent; /*--> funktioniert nicht, macht aber was es soll :-) clemens*/
 			color: #d3d4e4;
 		}
 
