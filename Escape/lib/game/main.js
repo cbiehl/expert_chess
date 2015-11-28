@@ -4,6 +4,7 @@ ig.module(
 .requires(
 	'impact.game',
 	'impact.font',
+	'game.entities.rocket',
 	'game.levels.escapeLvl',
 	'game.entities.ball'
 )
@@ -26,14 +27,15 @@ MyGame = ig.Game.extend({
 		// Update all entities and backgroundMaps
 		this.parent();
 		this.time2spawn = this.time2spawn-1;
-		if(this.time2spawn<0){
+		if(this.time2spawn<0 && this.rocket.isAlive){
 			this.time2spawn = 20;
-			var newObstacle = ig.game.spawnEntity('EntityBall', Math.random()*220+10,0);
+			var newObstacle = ig.game.spawnEntity('EntityBall', Math.random()*200+10,0);
 			newObstacle.vel.y=70;
 		}
 		// Add your own, additional update code here
 	},
 	
+
 	draw: function() {
 		// Draw all entities and backgroundMaps
 		this.parent();
@@ -44,6 +46,9 @@ MyGame = ig.Game.extend({
 			y = ig.system.height/2;
 		
 		this.font.draw( 'Avoid a collision!', x, y, ig.Font.ALIGN.CENTER );
+		x = 10;
+		y=0;
+		this.font.draw( 'x ' + this.rocket.score, x, y+10 )
 	}
 });
 

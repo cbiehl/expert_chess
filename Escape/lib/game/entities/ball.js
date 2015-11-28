@@ -33,11 +33,14 @@ EntityBall = ig.Entity.extend({
 		if(this.collision){
 			this.collision=false;
 			this.kill();
+			if(ig.game.rocket.isAlive)
+				ig.game.rocket.addScore(1);
 		}
 		this.parent();
 	},
 	
 	check: function(other){
+		other.setLiveStatus(false);
 		other.kill();
 		this.kill();
 		alert('You are dead');

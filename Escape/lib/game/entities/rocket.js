@@ -12,6 +12,8 @@ EntityRocket = ig.Entity.extend({
 	size: {x:32, y:32},
 	type: ig.Entity.TYPE.A,
 	checkAgainst: ig.Entity.TYPE.A,
+	score: 0,
+	isAlive: true,
 	
 	animSheet: new ig.AnimationSheet( 'media/myRocket.png', 32, 32 ),
 	
@@ -19,6 +21,7 @@ EntityRocket = ig.Entity.extend({
 		this.parent( x, y, settings );
 		
 		this.addAnim( 'idle', 1, [0] );
+		ig.game.rocket = this;
 	},
 	
 	update: function(){
@@ -32,6 +35,14 @@ EntityRocket = ig.Entity.extend({
 		}
 			
 		this.parent();
+	},
+	
+	addScore: function(n){
+		this.score+=n;
+	},
+	
+	setLiveStatus: function(bool){
+		this.isAlive = bool;
 	}
 	
 
