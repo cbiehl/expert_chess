@@ -2645,12 +2645,16 @@
 
 			}
 
+		#banner {
+			background: linear-gradient(to bottom, rgba(39,48,56,0.0) 70%, rgba(39,48,56,0.3) 80%, rgba(39,48,56,0.6) 90%);
+		}
+		
 		.wrapper.alt {
 			padding: 0;
 		}
 
 		.wrapper.style1 {
-			background: linear-gradient(to bottom, rgba(39,48,56,0.2) 0%, rgba(39,48,56,0.4) 10%, rgba(39,48,56,0.9) 40%, rgba(39,48,56,1) 60%);/* rgba(39,48,56,0.9); /*gunter #21b2a6 */
+			background: linear-gradient(to bottom, rgba(39,48,56,0.6) 0%, rgba(39,48,56,0.8) 5%, rgba(39,48,56,0.9) 10%, rgba(39,48,56,1) 20%);/* rgba(39,48,56,0.9); /*gunter #21b2a6 */
 			color: #c7ebe8;
 		}
 
