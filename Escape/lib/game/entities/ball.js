@@ -14,12 +14,12 @@ EntityBall = ig.Entity.extend({
 	checkAgainst: ig.Entity.TYPE.A,
 	collision:false,
 	
-	animSheet: new ig.AnimationSheet( 'media/hit.png', 24, 24 ),
+	animSheet: new ig.AnimationSheet( 'media/hit_comp.png', 24, 24 ),
 	
 	init: function( x, y, settings ) {
 		this.parent( x, y, settings );
-		
-		this.addAnim( 'idle', 1, [0] );
+		var i = Math.floor(Math.random()*3);
+		this.addAnim( 'idle', 1, [i] );
 	},
 	
 	handleMovementTrace: function(res){
@@ -43,7 +43,7 @@ EntityBall = ig.Entity.extend({
 		other.setLiveStatus(false);
 		other.kill();
 		this.kill();
-		alert('You are dead');
+		console.log('You are dead');
 	}
 
 });

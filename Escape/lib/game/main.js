@@ -14,6 +14,7 @@ MyGame = ig.Game.extend({
 	
 	// Load a font
 	font: new ig.Font( 'media/04b03.font.png' ),
+	clearColor: 'grey',
 	time2spawn:0,
 	
 	init: function() {
@@ -55,6 +56,6 @@ MyGame = ig.Game.extend({
 
 // Start the Game with 60fps, a resolution of 320x240, scaled
 // up by a factor of 2
-ig.main( '#canvas', MyGame, 60, 240, 160, 2 );
+ig.main( '#canvas', MyGame, 60, 240, 160, 3 );
 
 });

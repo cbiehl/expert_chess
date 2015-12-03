@@ -9,13 +9,13 @@ ig.module(
 
 EntityRocket = ig.Entity.extend({
 	
-	size: {x:32, y:32},
+	size: {x:24, y:32},
 	type: ig.Entity.TYPE.A,
 	checkAgainst: ig.Entity.TYPE.A,
 	score: 0,
 	isAlive: true,
 	
-	animSheet: new ig.AnimationSheet( 'media/myRocket.png', 32, 32 ),
+	animSheet: new ig.AnimationSheet( 'media/car.png', 24, 32 ),
 	
 	init: function( x, y, settings ) {
 		this.parent( x, y, settings );
@@ -26,10 +26,10 @@ EntityRocket = ig.Entity.extend({
 	
 	update: function(){
 		if (ig.input.state('right')){
-			this.vel.x=80;
+			this.vel.x=100;
 		} else
 		if (ig.input.state('left')){
-			this.vel.x=-80;
+			this.vel.x=-100;
 		} else {
 			this.vel.x=0;
 		}
