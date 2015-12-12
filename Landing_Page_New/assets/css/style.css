@@ -1,4 +1,4 @@
-﻿/*=============================================================
+/*=============================================================
     Authour URI: www.binarytheme.com
     License: Commons Attribution 3.0
 
@@ -69,7 +69,7 @@ body {
 
     .home-sec .overlay {
         background: rgba(38, 57, 88, 0.89);
-        min-height: 500px;
+        min-height: 400px; /* 500 */
     }
 
     .home-sec h1 {
@@ -77,7 +77,7 @@ body {
         font-weight: 900;
         font-size: 50px;
         text-transform: uppercase;
-        padding-bottom: 35px;
+        padding-bottom: 10px; /* 35 */
     }
 
     .home-sec h3 {
@@ -93,7 +93,7 @@ body {
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0);
     background-color: transparent;
     border: 0px solid #000;
-    padding-top: 120px;
+    padding-top: 90px; /* 120 */
 }
 
 .flex-control-nav {
@@ -115,14 +115,16 @@ body {
     .tag-line h2 {
         font-size: 20px;
         font-weight: 900;
-        padding: 5px 10px 10px 5px;
+        padding: 2px 2px 2px 2px;
         color: #005E5A;
+        margin-top: 1%;
     }
 
         .tag-line h2 > i {
             margin-left: 8px;
             margin-right: 8px;
         }
+    
 /*=====================================
   HEADER LINE STYLES 
     ===================================*/
@@ -267,4 +269,228 @@ h1::after {
     text-align:right;
     color:#fff;
     font-size:15px;
+/*=====================================
+  Custom STYLES 
+  ===================================*/
+#home iframe {
+			position: relative;
+			margin-top: 50px;
+		}
+		
+#icon_links {
+			position: absolute;
+			top: 5px;
+			left: 5px;
+		}
+		
+/* Banner */
+
+	#banner {
+		display: -moz-flex;
+		display: -webkit-flex;
+		display: -ms-flex;
+		display: flex;
+		-moz-flex-direction: column;
+		-webkit-flex-direction: column;
+		-ms-flex-direction: column;
+		flex-direction: column;
+		-moz-justify-content: center;
+		-webkit-justify-content: center;
+		-ms-justify-content: center;
+		justify-content: center;
+		cursor: default;
+		height: 100vh;
+		min-height: 35em;
+		overflow: hidden;
+		position: relative;
+		text-align: center;
+	}
+
+		#banner h2 {
+			-moz-transform: scale(1);
+			-webkit-transform: scale(1);
+			-ms-transform: scale(1);
+			transform: scale(1);
+			-moz-transition: -moz-transform 0.5s ease, opacity 0.5s ease;
+			-webkit-transition: -webkit-transform 0.5s ease, opacity 0.5s ease;
+			-ms-transition: -ms-transform 0.5s ease, opacity 0.5s ease;
+			transition: transform 0.5s ease, opacity 0.5s ease;
+			display: inline-block;
+			font-size: 1.75em;
+			opacity: 1;
+			padding: 0.35em 1em;
+			/*CLEMENS*/
+			vertical-align: middle;
+			position: relative;
+			margin-top: -20%;
+			z-index: 1;
+			/*ENDCLEMENS*/
+		}
+
+			#banner h2:before, #banner h2:after {
+				-moz-transition: width 0.85s ease;
+				-webkit-transition: width 0.85s ease;
+				-ms-transition: width 0.85s ease;
+				transition: width 0.85s ease;
+				-moz-transition-delay: 0.25s;
+				-webkit-transition-delay: 0.25s;
+				-ms-transition-delay: 0.25s;
+				transition-delay: 0.25s;
+				background: #fff;
+				content: '';
+				display: block;
+				height: 2px;
+				position: absolute;
+				width: 100%;
+			}
+
+			#banner h2:before {
+				top: 0;
+				left: 0;
+			}
+
+			#banner h2:after {
+				bottom: 0;
+				right: 0;
+			}
+
+		#banner p {
+			letter-spacing: 0.225em;
+			text-transform: uppercase;
+			vertical-align: middle; /*CLEMENS*/
+			margin-top: -8%; /*CLEMENS*/
+		}
+
+			#banner p a {
+				color: inherit;
+			}
+			
+		#banner countdown {
+			width: 60%;
+			height: 70%;
+			position: relative;
+			margin-left: -50%;
+		}
+			
+		#banner iframe {
+			position: relative;
+			margin-top: 50px;
+			margin-left: -75%;
+		}
+
+		#banner .more {
+			-moz-transition: -moz-transform 0.75s ease, opacity 0.75s ease;
+			-webkit-transition: -webkit-transform 0.75s ease, opacity 0.75s ease;
+			-ms-transition: -ms-transform 0.75s ease, opacity 0.75s ease;
+			transition: transform 0.75s ease, opacity 0.75s ease;
+			-moz-transition-delay: 3.5s;
+			-webkit-transition-delay: 3.5s;
+			-ms-transition-delay: 3.5s;
+			transition-delay: 3.5s;
+			-moz-transform: translateY(0);
+			-webkit-transform: translateY(0);
+			-ms-transform: translateY(0);
+			transform: translateY(0);
+			border: none;
+			bottom: 0;
+			color: inherit;
+			font-size: 0.8em;
+			height: 8.5em;
+			left: 50%;
+			letter-spacing: 0.225em;
+			margin-left: -8.5em;
+			opacity: 1;
+			outline: 0;
+			padding-left: 0.225em;
+			position: absolute;
+			text-align: center;
+			text-transform: uppercase;
+			width: 16em;
+			z-index: 1;
+		}
+
+			#banner .more:after {
+				background-image: url("images/arrow.svg");
+				background-position: center;
+				background-repeat: no-repeat;
+				background-size: contain;
+				bottom: 4em;
+				content: '';
+				display: block;
+				height: 1.5em;
+				left: 50%;
+				margin: 0 0 0 -0.75em;
+				position: absolute;
+				width: 1.5em;
+			}
+
+		#banner:after {
+			-moz-pointer-events: none;
+			-webkit-pointer-events: none;
+			-ms-pointer-events: none;
+			pointer-events: none;
+			-moz-transition: opacity 3s ease-in-out;
+			-webkit-transition: opacity 3s ease-in-out;
+			-ms-transition: opacity 3s ease-in-out;
+			transition: opacity 3s ease-in-out;
+			-moz-transition-delay: 1.25s;
+			-webkit-transition-delay: 1.25s;
+			-ms-transition-delay: 1.25s;
+			transition-delay: 1.25s;
+			content: '';
+			background: #2e3842;
+			display: block;
+			width: 100%;
+			height: 100%;
+			position: absolute;
+			left: 0;
+			top: 0;
+			opacity: 0;
+		}
+
+		@media screen and (max-width: 736px) {
+
+			#banner {
+				padding: 7em 3em 5em 3em ;
+				height: auto;
+				min-height: 0;
+			}
+
+				#banner h2 {
+					font-size: 1.25em;
+				}
+
+				#banner br {
+					display: none;
+				}
+
+				#banner .more {
+					display: none;
+				}
+
+		}
+
+	body.is-loading #banner h2 {
+		-moz-transform: scale(0.95);
+		-webkit-transform: scale(0.95);
+		-ms-transform: scale(0.95);
+		transform: scale(0.95);
+		opacity: 0;
+	}
+
+		body.is-loading #banner h2:before, body.is-loading #banner h2:after {
+			width: 0;
+		}
+
+	body.is-loading #banner .more {
+		-moz-transform: translateY(8.5em);
+		-webkit-transform: translateY(8.5em);
+		-ms-transform: translateY(8.5em);
+		transform: translateY(8.5em);
+		opacity: 0;
+	}
+
+	body.is-loading #banner:after {
+		opacity: 1;
+	}
 }

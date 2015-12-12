@@ -6,6 +6,7 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>Expert Chess</title>
+    <link href="assets/css/counter.css" rel="stylesheet" />
     <!-- BOOTSTRAP CORE STYLE CSS -->
     <link href="assets/css/bootstrap.css" rel="stylesheet" />
     <!-- FONT AWESOME CSS -->
@@ -16,9 +17,9 @@
     <link href="assets/css/style.css" rel="stylesheet" />    
   <!-- Google	Fonts -->
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,300' rel='stylesheet' type='text/css' />
+	<link rel="shortcut icon" href="assets/img/icon.png">
 </head>
-<body >
-   
+<body > 
  <div class="navbar navbar-inverse navbar-fixed-top " id="menu">
         <div class="container">
             <div class="navbar-header">
@@ -31,10 +32,9 @@
             </div>
             <div class="navbar-collapse collapse move-me">
                 <ul class="nav navbar-nav navbar-right">
+                	<li><a href="#" style="color:red">PLAY NOW</a></li>
                     <li ><a href="#home">HOME</a></li>
                      <li><a href="#features-sec">FEATURES</a></li>
-                    <li><a href="#faculty-sec">FACULTY</a></li>
-                     <li><a href="#course-sec">COURSES</a></li>
                      <li><a href="#contact-sec">CONTACT</a></li>
                 </ul>
             </div>
@@ -42,6 +42,17 @@
         </div>
     </div>
       <!--NAVBAR SECTION END-->
+      <!--
+      <div id="banner">
+			<div class="inner">
+				<h2>Expert Chess</h2>
+				<p>The most action-packed innovation<br />
+				in strategic gaming<br />
+				</p>
+			</div>
+		</div>
+		-->
+      
        <div class="home-sec" id="home" >
            <div class="overlay">
  <div class="container">
@@ -52,27 +63,35 @@
                 <div class="flexslider set-flexi" id="main-section" >
                     <ul class="slides move-me">
                         <!-- Slider 01 -->
+                        
                         <li>
                            <h3>EXPERT CHESS</h3>
-                           <h1>TRY THE INNOVATION IN STRATEGIC GAMING</h1>
-                            <a  href="#features-sec" class="btn btn-info btn-lg" >
-                                GET AWESOME 
+                           <h1>TRY THE LATEST INNOVATION IN STRATEGIC GAMING</h1>
+                            <a  href="#features-sec" class="btn btn-danger btn-lg" >
+                                PLAY NOW
                             </a>
-                             <a  href="#features-sec" class="btn btn-success btn-lg" >
+                             <a  href="#features-sec" class="btn btn-info btn-lg" >
                                 FEATURE LIST
                             </a>
+                            <a  href="#contact-sec" class="btn btn-success btn-lg" >
+                                GET IN TOUCH
+                            </a>
+                            
                         </li>
                         <!-- End Slider 01 -->
                         
                         <!-- Slider 02 -->
                         <li>
                            <h3>EXPERT CHESS</h3>
-                           <h1>FIND A NEW WAY </h1>
-                             <a  href="#features-sec" class="btn btn-primary btn-lg" >
-                               PLAY NOW
-                            </a>
+                           <h1>MAKE YOUR WAY THROUGH THE HARDEST CHESS GAME EVER</h1>
                              <a  href="#features-sec" class="btn btn-danger btn-lg" >
-                               FEATURE LIST
+                                PLAY NOW
+                            </a>
+                             <a  href="#features-sec" class="btn btn-info btn-lg" >
+                                FEATURE LIST
+                            </a>
+                            <a  href="#contact-sec" class="btn btn-success btn-lg" >
+                                GET IN TOUCH
                             </a>
                         </li>
                         <!-- End Slider 02 -->
@@ -80,7 +99,7 @@
                         <!-- Slider 03 -->
                         <li>
                             <h3>EXPERT CHESS</h3>
-                           	<iframe id="iframe_pp" src="http://www.youtube.com/embed/2ua0WZA_8ms" width="400" height="220"><br /></iframe>
+                           	<iframe id="iframe_pp" src="http://www.youtube.com/embed/2ua0WZA_8ms" width="600" height="260"><br /></iframe>
                         </li>
                         <!-- End Slider 03 -->
                     </ul>
@@ -97,18 +116,27 @@
            
        </div>
        <!--HOME SECTION END-->   
-    <div  class="tag-line" >
+    <div class="tag-line" >
          <div class="container">
            <div class="row  text-center" >
            
-               <div class="col-lg-12  col-md-12 col-sm-12">
+               <div id="countdownBox" class="col-lg-12  col-md-12 col-sm-12">
                
-        <!-- <h2 data-scroll-reveal="enter from the bottom after 0.1s" ><i class="fa fa-circle-o-notch"></i> WELCOME TO THE EXPERT CHESS <i class="fa fa-circle-o-notch"></i> </h2> -->
-        			
-        			<ul class="actions">
-						<li><a href="#" class="button special">PLAY NOW</a></li>
-					</ul>
+        <!-- <h2 data-scroll-reveal="enter from the bottom after 0.1s" ><i class="fa fa-circle-o-notch"></i> WELCOME TO THE EXPERT CHESS <i class="fa fa-circle-o-notch"></i> </h2>
+        
+        			<button class="btn btn-danger btn-block btn-lg" onclick="play()">PLAY NOW</button>
+        			<script>
+        				function play() {
+        				window.location.href = "http://www.google.de";
+        				}
+        			</script>
+        			-->
+        			<h2>
+        			<div id="countdown" class="countdownHolder">
+					</div>
+					<p id="note"> </p>
                    </div>
+                   </h2> <!-- dirty but works!!! -->
                </div>
              </div>
         
@@ -119,10 +147,7 @@
                  <div class="col-lg-8 col-lg-offset-2 col-md-8 col-sm-8 col-md-offset-2 col-sm-offset-2">
                      <h1 data-scroll-reveal="enter from the bottom after 0.2s"  class="header-line">FEATURE LIST </h1>
                      <p data-scroll-reveal="enter from the bottom after 0.3s" >
-                      Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                        Aenean commodo.
-                         Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                        Aenean commodo.
+                      Der Entwickler dieser Seite hat eigentlich gar keine Ahnung von Webentwicklung, aber hat am sein Privatleben endgültig aufgegeben und sucht noch nach einem Termin, um von der Brücke zu springen.
                          </p>
                  </div>
 
@@ -136,7 +161,7 @@
                  <div class="col-lg-4  col-md-4 col-sm-4" data-scroll-reveal="enter from the bottom after 0.4s">
                      <div class="about-div">
                      <i class="fa fa-gamepad fa-4x icon-round-border" ></i>
-                   <h3 >Quality Education</h3>
+                   <h3 >PLAY ACTION-PACKED MINIGAMES</h3>
                  <hr />
                        <hr />
                    <p >
@@ -150,7 +175,7 @@
                    <div class="col-lg-4  col-md-4 col-sm-4" data-scroll-reveal="enter from the bottom after 0.5s">
                      <div class="about-div">
                      <i class="fa fa-puzzle-piece fa-4x icon-round-border" ></i>
-                   <h3 >SYSTEMATIC APPROACH</h3>
+                   <h3 > PROVE YOUR STRATEGIC SKILLS</h3>
                  <hr />
                        <hr />
                    <p >
@@ -164,7 +189,7 @@
                  <div class="col-lg-4  col-md-4 col-sm-4" data-scroll-reveal="enter from the bottom after 0.6s">
                      <div class="about-div">
                      <i class="fa fa-rocket fa-4x icon-round-border" ></i>
-                   <h3 >ONE TO ONE STUDY</h3>
+                   <h3 >USE VARIOUS CRAZY ITEMS</h3>
                  <hr />
                        <hr />
                    <p >
@@ -179,7 +204,8 @@
                  
                </div>
              </div>
-   <!-- FEATURES SECTION END-->
+   <!-- FEATURES SECTION END -->
+   <!-- 
     <div id="faculty-sec" >
     <div class="container set-pad">
              <div class="row text-center">
@@ -194,7 +220,7 @@
                  </div>
 
              </div>
-             <!--/.HEADER LINE END-->
+             <!--/.HEADER LINE END
 
            <div class="row" >
            
@@ -389,7 +415,7 @@
                 </div>
                  <div class="col-lg-4 col-md-4 col-sm-4   col-lg-offset-1 col-md-offset-1 col-sm-offset-1" data-scroll-reveal="enter from the bottom after 0.4s">
 
-                    <h2 ><strong>Social Conectivity </strong></h2>
+                    <h2 ><strong>Tell it like it is on...</strong></h2>
         <hr />
                     <div >
                         <a href="#">  <img src="assets/img/Social/facebook.png" alt="" /> </a>
@@ -403,7 +429,7 @@
                  </div>
      <!-- CONTACT SECTION END-->
     <div id="footer">
-          &copy 2014 yourdomain.com | All Rights Reserved |  <a href="http://binarytheme.com" style="color: #fff" target="_blank">Design by : binarytheme.com</a>
+          2015 Expert Chess | All Rights Reserved |  <a href="http://binarytheme.com" style="color: #fff" target="_blank">Design by : binarytheme.com</a>
     </div>
      <!-- FOOTER SECTION END-->
    
@@ -419,5 +445,10 @@
     <script src="assets/js/jquery.easing.min.js"></script>
     <!--  Custom Scripts --> 
          <script src="assets/js/custom.js"></script>
+    <!-- Countdown timer -->
+		<script src="assets/js/jquery.countdown.js"></script>
+		<script src="assets/js/script.js"></script>
+	<!-- Banner -->
+		<script src="assets/js/jquery.scrollex.min.js"></script>
 </body>
 </html>

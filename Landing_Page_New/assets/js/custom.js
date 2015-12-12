@@ -39,7 +39,7 @@
 
         },
         
-        clicksOnYoutubePlugin:0,
+        clicksOnYoutubePlugin:"0",
 
          top_flex_slider_fun:function()
          {
@@ -54,26 +54,22 @@
 
              });
              
-             $('#iframe_pp').click(function(){
+             $('.iframe').click(function(){ //Attention: There is only 1 iframe in here!!
              	 console.log("ER IST DRIN!");
-                  clicksOnYoutubePlugin += 1;
+                 clicksOnYoutubePlugin += 1;
              	 console.log(clicksOnYoutubePlugin);
               	 if(clicksOnYoutubePlugin % 2 == 0){
               		$('#main-section').flexslider('play');
                 	 }else{
                 		$('#main-section').flexslider('pause');
-                	 }
+             	 }
               });
              
          },
         
         clemens_stuff:function()
         {
-            /*====================================
-             WRITE YOUR   SCRIPTS  BELOW
-            ======================================*/
-        	
-
+            
         },
         
     }
@@ -87,4 +83,19 @@
     
 }(jQuery));
 
-
+//$(function() {
+//    var $banner = $('#banner');
+//	if ($banner.length > 0
+//			&&	$header.hasClass('alt')) {
+//
+//				$window.on('resize', function() { $window.trigger('scroll'); });
+//
+//				$banner.scrollex({
+//					bottom:		$header.outerHeight() + 1,
+//					terminate:	function() { $header.removeClass('alt'); },
+//					enter:		function() { $header.addClass('alt'); },
+//					leave:		function() { $header.removeClass('alt'); }
+//				});
+//
+//			}
+//});
