@@ -3173,7 +3173,7 @@
 		-ms-transition: -ms-transform 0.5s ease;
 		transition: transform 0.5s ease;
 		-webkit-overflow-scrolling: touch;
-		background: #21b2a6;
+		background: #008000;
 		color: #ffffff;
 		height: 100%;
 		max-width: 80%;
@@ -3422,8 +3422,12 @@
 			font-size: 1.75em;
 			opacity: 1;
 			padding: 0.35em 1em;
+			/*CLEMENS*/
+			vertical-align: middle;
 			position: relative;
+			margin-top: -20%;
 			z-index: 1;
+			/*ENDCLEMENS*/
 		}
 
 			#banner h2:before, #banner h2:after {
@@ -3456,11 +3460,26 @@
 		#banner p {
 			letter-spacing: 0.225em;
 			text-transform: uppercase;
+			vertical-align: middle; /*CLEMENS*/
+			margin-top: -8%; /*CLEMENS*/
 		}
 
 			#banner p a {
 				color: inherit;
 			}
+			
+		#banner countdown {
+			width: 60%;
+			height: 70%;
+			position: relative;
+			margin-left: -50%;
+		}
+			
+		#banner iframe {
+			position: relative;
+			margin-top: 50px;
+			margin-left: -75%;
+		}
 
 		#banner .more {
 			-moz-transition: -moz-transform 0.75s ease, opacity 0.75s ease;
