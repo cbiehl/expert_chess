@@ -96,7 +96,7 @@
                  slideshowSpeed: 5000,           //Integer: Set the speed of the slideshow cycling, in milliseconds
                  animationSpeed: 800,           //Integer: Set the speed of animations, in milliseconds
                  startAt: 0,    //Integer: The slide that the slider should start on. Array notation (0 = first slide)
-                 pausePlay: true,
+                 //pausePlay: true,
                  pauseOnAction: true,
                  video: true,
                  before: function(){                     

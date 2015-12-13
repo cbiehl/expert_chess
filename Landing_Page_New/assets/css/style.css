@@ -493,4 +493,31 @@ h1::after {
 	body.is-loading #banner:after {
 		opacity: 1;
 	}
+	
+}
+/*Clemens war hier, aber zu blöd das banner zum laufen zu bringen*/
+#pp1 {
+	position: relative;
+	margin-top: 5px;
+	margin-bottom: 50px;
+}
+
+#springer {
+	position: fixed;
+	top: 50%;
+	left: 80%;
+}
+
+#springer2 {
+	position: fixed;
+	top: 50%;
+	left: -3%;
+}
+
+#iframe2 {
+	margin-top: 40px;
+}
+
+#accordion {
+	margin-top: 40px;
 }
