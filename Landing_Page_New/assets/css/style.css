@@ -676,4 +676,5 @@ h1::after {
 
 .btn-home{
 	width: 20%;
+	min-width: 195px;
 }
