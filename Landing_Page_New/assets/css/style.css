@@ -525,6 +525,9 @@ h1::after {
 
 
 /*Gunter war hier*/
+.getInTouch{
+	margin-top:-0%;
+}
 #featureset{
 	text-align: center;
 	margin-top:-8%;
@@ -669,4 +672,8 @@ h1::after {
     -webkit-transform: translateY(-8px);
     transform: translateY(-8px);
   }
+}
+
+.btn-home{
+	width: 20%;
 }
