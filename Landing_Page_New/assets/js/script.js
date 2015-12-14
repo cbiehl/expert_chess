@@ -1,7 +1,8 @@
 $(function(){
 
+	//month = 12 --> January; month is 0 based
 	var note = $('#note'),
-		ts = new Date(2016, 01, 25);
+		ts = new Date(2015, 12, 25);
 
 	$('#countdown').countdown({
 		timestamp	: ts,

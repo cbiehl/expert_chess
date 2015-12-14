@@ -27,7 +27,6 @@
 			if(left < 0){
 				left = 0;
 			}
-
 			// Number of days left
 			d = Math.floor(left / days);
 			updateDuo(0, 1, d);

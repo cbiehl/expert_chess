@@ -59,7 +59,7 @@ body {
 .home-sec {
     padding-top: 10px;
     padding-bottom: 60px;
-    background: url(../img/header.jpg) no-repeat center center;
+    background: url(../img/bg.png) no-repeat center center;
     padding: 0;
     -webkit-background-size: cover;
     background-size: cover;
@@ -495,7 +495,7 @@ h1::after {
 	}
 	
 }
-/*Clemens war hier, aber zu blöd das banner zum laufen zu bringen*/
+/*Clemens war hier, aber zu blï¿½d das banner zum laufen zu bringen*/
 #pp1 {
 	position: relative;
 	margin-top: 5px;
@@ -520,4 +520,153 @@ h1::after {
 
 #accordion {
 	margin-top: 40px;
+}
+
+
+
+/*Gunter war hier*/
+#featureset{
+	text-align: center;
+	margin-top:-8%;
+}
+
+.springer {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.springer, .springer:focus, .springer:active {
+  -webkit-animation-name: springer-float, springer;
+  animation-name: springer-float, springer;
+  -webkit-animation-duration: .3s, 1.5s;
+  animation-duration: .3s, 1.5s;
+  -webkit-animation-delay: 0s, .3s;
+  animation-delay: 0s, .3s;
+  -webkit-animation-timing-function: ease-out, ease-in-out;
+  animation-timing-function: ease-out, ease-in-out;
+  -webkit-animation-iteration-count: 1, infinite;
+  animation-iteration-count: 1, infinite;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+  -webkit-animation-direction: normal, alternate;
+  animation-direction: normal, alternate;
+}
+
+@-webkit-keyframes springer {
+  0% {
+    -webkit-transform: translateY(-16px);
+    transform: translateY(-16px);
+  }
+
+  50% {
+    -webkit-transform: translateY(-8px);
+    transform: translateY(-8px);
+  }
+
+  100% {
+    -webkit-transform: translateY(-16px);
+    transform: translateY(-16px);
+  }
+}
+
+@keyframes springer {
+  0% {
+    -webkit-transform: translateY(-16px);
+    transform: translateY(-16px);
+  }
+
+  50% {
+    -webkit-transform: translateY(-8px);
+    transform: translateY(-8px);
+  }
+
+  100% {
+    -webkit-transform: translateY(-16px);
+    transform: translateY(-16px);
+  }
+}
+
+@-webkit-keyframes springer-float {
+  100% {
+    -webkit-transform: translateY(-16px);
+    transform: translateY(-16px);
+  }
+}
+
+@keyframes springer-float {
+  100% {
+    -webkit-transform: translateY(-16px);
+    transform: translateY(-16px);
+  }
+}
+
+.hoverEff:hover, .hoverEff:focus, .hoverEff:active {
+  -webkit-animation-name: icon-float, icon;
+  animation-name: icon-float, icon;
+  -webkit-animation-duration: .3s, 1.5s;
+  animation-duration: .3s, 1.5s;
+  -webkit-animation-delay: 0s, .3s;
+  animation-delay: 0s, .3s;
+  -webkit-animation-timing-function: ease-out, ease-in-out;
+  animation-timing-function: ease-out, ease-in-out;
+  -webkit-animation-iteration-count: 1, infinite;
+  animation-iteration-count: 1, infinite;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+  -webkit-animation-direction: normal, alternate;
+  animation-direction: normal, alternate;
+}
+
+@-webkit-keyframes icon {
+  0% {
+    -webkit-transform: translateY(-8px);
+    transform: translateY(-8px);
+  }
+
+  50% {
+    -webkit-transform: translateY(-4px);
+    transform: translateY(-4px);
+  }
+
+  100% {
+    -webkit-transform: translateY(-8px);
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes icon {
+  0% {
+    -webkit-transform: translateY(-8px);
+    transform: translateY(-8px);
+  }
+
+  50% {
+    -webkit-transform: translateY(-4px);
+    transform: translateY(-4px);
+  }
+
+  100% {
+    -webkit-transform: translateY(-8px);
+    transform: translateY(-8px);
+  }
+}
+
+@-webkit-keyframes icon-float {
+  100% {
+    -webkit-transform: translateY(-8px);
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes icon-float {
+  100% {
+    -webkit-transform: translateY(-8px);
+    transform: translateY(-8px);
+  }
 }

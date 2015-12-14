@@ -1,5 +1,5 @@
 #note{
-	color: #666666;
+	color: white;
 	font-size: 15px;
 	margin: 0 auto;
 	padding: 4px;
@@ -27,7 +27,7 @@
 	position:absolute;
 	display:block;
 	width:1em;
-	background-color:#444;
+	background-color:#213973; /*Gunter #444;*/
 	border-radius:0.2em;
 	text-align:center;
 	color:#fff;
@@ -36,7 +36,7 @@
 
 .digit.static{
 	box-shadow:1px 1px 1px rgba(4, 4, 4, 0.35);
-	
+	/*
 	background-image: linear-gradient(bottom, #3A3A3A 50%, #444444 50%);
 	background-image: -o-linear-gradient(bottom, #3A3A3A 50%, #444444 50%);
 	background-image: -moz-linear-gradient(bottom, #3A3A3A 50%, #444444 50%);
@@ -50,6 +50,14 @@
 		color-stop(0.5, #3A3A3A),
 		color-stop(0.5, #444444)
 	);
+	*/
+	/*gunter*/
+	background-image: -webkit-gradient( linear, left bottom, left top, color-stop(0.5, #1C2B4B), color-stop(0.5, #213973));
+	background-image: linear-gradient(bottom, #1C2B4B 50%, #213973 50%);
+	background-image: -o-linear-gradient(bottom, #1C2B4B 50%, #213973 50%);
+	background-image: -moz-linear-gradient(bottom, #1C2B4B 50%, #213973 50%);
+	background-image: -webkit-linear-gradient(bottom, #1C2B4B 50%, #213973 50%);
+	background-image: -ms-linear-gradient(bottom, #1C2B4B 50%, #213973 50%);
 }
 
 .countDiv{
@@ -64,7 +72,7 @@
 	position:absolute;
 	width:5px;
 	height:5px;
-	background-color:#444;
+	background-color: #213973 /*gunter #444 */;
 	border-radius:50%;
 	left:50%;
 	margin-left:-3px;
