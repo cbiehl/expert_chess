@@ -1,5 +1,10 @@
 ﻿
 (function ($) {
+	if(window.innerWidth<1623){
+		 $("#springer").fadeOut(0);
+		 $("#springer2").fadeOut(0);
+	}
+	
 	$( window ).resize(function() {
 		 if(window.innerWidth<1623){
 			 $("#springer").fadeOut(1000);

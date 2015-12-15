@@ -516,6 +516,7 @@ h1::after {
 
 #iframe2 {
 	margin-top: 40px;
+	max-width: 100%;
 }
 
 #accordion {
