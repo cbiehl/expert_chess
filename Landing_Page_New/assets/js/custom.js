@@ -1,5 +1,18 @@
 ﻿
 (function ($) {
+	$( window ).resize(function() {
+		 if(window.innerWidth<1623){
+			 $("#springer").fadeOut(1000);
+			 $("#springer2").fadeOut(1000);
+		 }
+		 
+		 if(window.innerWidth>1623){
+			 $("#springer").fadeIn(1000);
+			 $("#springer2").fadeIn(1000);			 
+		 }
+			 
+		});
+	
     "use strict";
     var mainApp = {
         scrollAnimation_fun: function () {
