@@ -134,7 +134,21 @@
         
         clemens_stuff:function()
         {
-            
+        	function ValidateEmail(inputText)  
+        	{  
+	        	var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;  
+	        	
+	        	if(inputText.value.match(mailformat))  
+	        	{  
+	        		return;  
+	        	}  
+	        	else  
+	        	{  
+		        	alert("Sorry, you have entered an invalid email address!");
+		        	this.parentNode.email.focus();
+        			return false;
+	        	}  
+        	}
         },
         
     }
