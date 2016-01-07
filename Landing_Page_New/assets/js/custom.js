@@ -1,19 +1,29 @@
 ﻿
 (function ($) {
+	
 	if(window.innerWidth<1623){
 		 $("#springer").fadeOut(0);
 		 $("#springer2").fadeOut(0);
+		 
+		 var tmp = $(".home-sec");
+		 tmp.css("background", "url(assets/img/Springer.png)");
 	}
 	
 	$( window ).resize(function() {
 		 if(window.innerWidth<1623){
 			 $("#springer").fadeOut(1000);
-			 $("#springer2").fadeOut(1000);
+  			 $("#springer2").fadeOut(1000);
+  			 
+  			 var tmp = $(".home-sec");
+  			 tmp.css("background", "url(assets/img/Springer.png)");
 		 }
 		 
 		 if(window.innerWidth>1623){
 			 $("#springer").fadeIn(1000);
-			 $("#springer2").fadeIn(1000);			 
+			 $("#springer2").fadeIn(1000);
+			 
+			 var tmp = $(".home-sec");
+			 tmp.css("background", "url(assets/img/bg.png)");
 		 }
 			 
 		});
