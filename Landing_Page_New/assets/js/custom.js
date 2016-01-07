@@ -7,6 +7,9 @@
 		 
 		 var tmp = $(".home-sec");
 		 tmp.css("background", "url(assets/img/Springer.png)");
+		 tmp.css("background-position","center top 50px");
+		 tmp.css("background-size", "25% 100%");
+		 tmp.css("-webkit-background-size", "25% 100%");
 	}
 	
 	$( window ).resize(function() {
@@ -16,6 +19,9 @@
   			 
   			 var tmp = $(".home-sec");
   			 tmp.css("background", "url(assets/img/Springer.png)");
+  			 tmp.css("background-position","center top 50px");
+  			 tmp.css("background-size", "25% 100%");
+  			 tmp.css("-webkit-background-size", "25% 100%");
 		 }
 		 
 		 if(window.innerWidth>1623){
@@ -24,6 +30,9 @@
 			 
 			 var tmp = $(".home-sec");
 			 tmp.css("background", "url(assets/img/bg.png)");
+			 tmp.css("background-position","");
+  			 tmp.css("background-size", "cover");
+  			 tmp.css("-webkit-background-size", "cover");
 		 }
 			 
 		});
