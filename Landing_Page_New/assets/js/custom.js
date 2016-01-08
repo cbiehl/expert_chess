@@ -1,19 +1,38 @@
 ﻿
 (function ($) {
+	
 	if(window.innerWidth<1623){
 		 $("#springer").fadeOut(0);
 		 $("#springer2").fadeOut(0);
+		 
+		 var tmp = $(".home-sec");
+		 tmp.css("background", "url(assets/img/springer.png)");
+		 tmp.css("background-position","center top 50px");
+		 tmp.css("background-size", "25% 100%");
+		 tmp.css("-webkit-background-size", "25% 100%");
 	}
 	
 	$( window ).resize(function() {
 		 if(window.innerWidth<1623){
 			 $("#springer").fadeOut(1000);
-			 $("#springer2").fadeOut(1000);
+  			 $("#springer2").fadeOut(1000);
+  			 
+  			 var tmp = $(".home-sec");
+  			 tmp.css("background", "url(assets/img/springer.png)");
+  			 tmp.css("background-position","center top 50px");
+  			 tmp.css("background-size", "25% 100%");
+  			 tmp.css("-webkit-background-size", "25% 100%");
 		 }
 		 
 		 if(window.innerWidth>1623){
 			 $("#springer").fadeIn(1000);
-			 $("#springer2").fadeIn(1000);			 
+			 $("#springer2").fadeIn(1000);
+			 
+			 var tmp = $(".home-sec");
+			 tmp.css("background", "url(assets/img/bg.png)");
+			 tmp.css("background-position","");
+  			 tmp.css("background-size", "cover");
+  			 tmp.css("-webkit-background-size", "cover");
 		 }
 			 
 		});
@@ -134,7 +153,21 @@
         
         clemens_stuff:function()
         {
-            
+        	function ValidateEmail(inputText)  
+        	{  
+	        	var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;  
+	        	
+	        	if(inputText.value.match(mailformat))  
+	        	{  
+	        		return;  
+	        	}  
+	        	else  
+	        	{  
+		        	alert("Sorry, you have entered an invalid email address!");
+		        	this.parentNode.email.focus();
+        			return false;
+	        	}  
+        	}
         },
         
     }
