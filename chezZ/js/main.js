@@ -277,14 +277,18 @@ function init() {
 			element.parentNode.removeChild(element);
 			//TODO: delete token, enemy's turn
 			console.log("LOST MINIGAME LOST MINIGAME LOST MINIGAME LOST");
+			wonMinigame = false;
+			lostMinigame = true;
 			
 		}else if(message.data == "DELETEIFRAMEWON"){
 			
 			var element = document.getElementById("minigame");
 			element.parentNode.removeChild(element);
 			//TODO: get item, player's turn again
+			setJetpack(true);
 			console.log("WIN WIN WIN YEAH WIN WIN WIN");
-			
+			wonMinigame = true;
+			lostMinigame = false;
 		}
 	}
 	

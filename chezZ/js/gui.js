@@ -139,7 +139,7 @@ $(document).on('click','.Square', function (e) {
 			var file = FilesBrd[UserMove.to] + 1;
 			frStr = ".Square"+".rank"+rank + ".file"+file;
 			if($(frStr).hasClass("markedField"))
-				useJetpack(36,UserMove.to);
+				useJetpack(oldSqMinigame,UserMove.to);
 //		}		
 	}
 	/*gunter end*/
@@ -184,6 +184,7 @@ function MakeUserMove() {
 			var domSq = $(".Square"+".rank"+rank + ".file"+file);
 			if(domSq.hasClass("specialField")){
 				console.log("Jetzt sollten wir in Impact abspringen");
+				oldSqMinigame = to;
 			/*gunter end*/
 			/*clemens start*/
 				var iframe = document.createElement("iframe");
@@ -201,7 +202,7 @@ function MakeUserMove() {
 				iframe.style.padding = "0";
 				iframe.style.overflow = "hidden";
 				iframe.style.zIndex = "999999";
-//				document.body.appendChild(iframe);
+				document.body.appendChild(iframe);
 			/*clemens end*/
 			}
 		}
