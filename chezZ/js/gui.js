@@ -182,11 +182,12 @@ function MakeUserMove() {
 			var rank = RanksBrd[to]+1;
 			
 			var domSq = $(".Square"+".rank"+rank + ".file"+file);
-			if(domSq.hasClass("specialField"))
+			if(domSq.hasClass("specialField")){
 				console.log("Jetzt sollten wir in Impact abspringen");
 			/*gunter end*/
 			/*clemens start*/
 				var iframe = document.createElement("iframe");
+				iframe.id = "minigame";
 				iframe.src = "Escape/index.html";
 				iframe.style.width = "100%";
 				iframe.style.height = "100%";
@@ -202,6 +203,7 @@ function MakeUserMove() {
 				iframe.style.zIndex = "999999";
 //				document.body.appendChild(iframe);
 			/*clemens end*/
+			}
 		}
 	
 		DeSelectSq(UserMove.from);
