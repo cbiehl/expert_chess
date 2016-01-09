@@ -285,7 +285,7 @@ function init() {
 			var element = document.getElementById("minigame");
 			element.parentNode.removeChild(element);
 			//TODO: get item, player's turn again
-			setJetpack(true);
+			setMissile(true);
 			console.log("WIN WIN WIN YEAH WIN WIN WIN");
 			wonMinigame = true;
 			lostMinigame = false;

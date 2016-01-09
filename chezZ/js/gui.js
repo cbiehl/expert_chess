@@ -402,6 +402,7 @@ function StartSearch() {
 	debugger;
 	MakeMove(SearchController.best);
 	MoveGUIPiece(SearchController.best);
+	
 	CheckAndSet();
 }
 
