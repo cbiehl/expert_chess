@@ -1,5 +1,14 @@
 function lostMinigame(sq){
-	//TODO: an Square sq Figur töten --> Vielleicht über FEN-String?
+	ClearPiece(sq);
+	RemoveGUIPiece(sq);
+}
+
+function wonMinigame(sq){
+	if(Math.random()>0.5){
+		setJetpack(true);
+	}else{
+		setMissile(true);
+	}
 }
 
 //jetpack functions
