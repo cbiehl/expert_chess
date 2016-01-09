@@ -14,6 +14,7 @@ EntityRocket = ig.Entity.extend({
 	checkAgainst: ig.Entity.TYPE.A,
 	score: 0,
 	isAlive: true,
+	escape:false,
 	
 	animSheet: new ig.AnimationSheet( 'media/car.png', 24, 32 ),
 	
@@ -33,7 +34,9 @@ EntityRocket = ig.Entity.extend({
 		} else {
 			this.vel.x=0;
 		}
-			
+		
+		if(this.pos.y<-32)
+			ig.game.youWon();
 		this.parent();
 	},
 	
@@ -43,6 +46,13 @@ EntityRocket = ig.Entity.extend({
 	
 	setLiveStatus: function(bool){
 		this.isAlive = bool;
+	},
+	
+	escapeFct: function(){
+		ig.input.unbindAll();
+		this.escape = true;
+		ig.game.cntDown.pause();
+		this.vel.y=-200;
 	}
 	
 

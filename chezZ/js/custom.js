@@ -1,3 +1,12 @@
+function setMissile(bool){
+	if(bool){
+		markAllBlackPawns();
+		hasMissile = true;
+	} else{
+		unmarkAllSquares(0);
+		hasMissile = false;
+	}
+}
 function lostMinigame(sq){
 	//TODO: an Square sq Figur töten --> Vielleicht über FEN-String?
 }

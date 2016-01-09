@@ -22,20 +22,25 @@ EntityBall = ig.Entity.extend({
 		this.addAnim( 'idle', 1, [i] );
 	},
 	
-	handleMovementTrace: function(res){
-		if (res.collision.x || res.collision.y){
-			this.collision = true;
-		}
-		this.parent(res);
-	},
+//	handleMovementTrace: function(res){
+//		if (res.collision.x || res.collision.y){
+//			this.collision = true;
+//		}
+//		this.parent(res);
+//	},
 	
 	update: function(){
-		if(this.collision){
-			this.collision=false;
+		if(this.pos.y>=136){
 			this.kill();
 			if(ig.game.rocket.isAlive)
 				ig.game.rocket.addScore(1);
 		}
+//		if(this.collision){
+//			this.collision=false;
+//			this.kill();
+//			if(ig.game.rocket.isAlive)
+//				ig.game.rocket.addScore(1);
+//		}
 		this.parent();
 	},
 	
@@ -43,7 +48,7 @@ EntityBall = ig.Entity.extend({
 		other.setLiveStatus(false);
 		other.kill();
 		this.kill();
-		console.log('You are dead');
+		ig.game.youLost();
 	}
 
 });

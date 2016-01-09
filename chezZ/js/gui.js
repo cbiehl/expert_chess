@@ -1,3 +1,10 @@
+/*Gunter*/
+$('#Missile').click( function () {
+	setMissile(!hasMissile);
+});
+
+/*Gunter end*/
+
 $("#SetFen").click(function () {
 	var fenStr = $("#fenIn").val();	
 	NewGame(fenStr);
@@ -46,11 +53,6 @@ function SetInitialBoardPieces() {
 			AddGUIPiece(sq120, pce);
 		}
 	}
-	
-	/*Gunter Start*/
-	if(hasMissile)
-		markAllBlackPawns();
-	/*Gunter end*/
 }
 
 function DeSelectSq(sq) {
@@ -132,7 +134,6 @@ function MakeUserMove() {
 	if(UserMove.from != SQUARES.NO_SQ && UserMove.to != SQUARES.NO_SQ) {
 	
 		console.log("User Move:" + PrSq(UserMove.from) + PrSq(UserMove.to));	
-		debugger;
 		var parsed = ParseMove(UserMove.from,UserMove.to);
 		
 		if(parsed != NOMOVE) {
@@ -345,6 +346,8 @@ function StartSearch() {
 	SearchController.time = parseInt(tt) * 1000;
 	SearchPosition();
 	
+	//TODO: Hier Checken, ob auf Feld getreten
+	debugger;
 	MakeMove(SearchController.best);
 	MoveGUIPiece(SearchController.best);
 	CheckAndSet();
