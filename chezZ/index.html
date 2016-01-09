@@ -3,7 +3,8 @@
 	<head>
 		<meta charset="utf-8">
 		<title>JSChess</title>	
-		<link href="styles.css" rel="stylesheet" type="text/css">	
+		<link href="styles.css" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">	
 		<script type="text/javascript"> if (!window.console) console = {log: function() {}}; </script>
 	</head>
 	<body>
@@ -46,8 +47,31 @@
 			<span id="GameStatus"></span>
 		</div>
 		
+		<!-- Modals -->
+		<div id="EscapeModal" class="modal fade" role="dialog">
+		  <div class="modal-dialog">
+		
+		    <!-- Modal content-->
+		    <div class="modal-content">
+		      <div class="modal-header">
+		      	<h4 class="modal-title">Minigame "Escape"</h4>
+		      </div>
+		      <div class="modal-body">
+		        <p>Escape the obstacles with the left and right arrow key! <br/>
+		           blablubtestest<br/>
+		           <b>Do not hit the obstacles!</b>.<br/> <br/>
+		      </div>
+		      <div class="modal-footer">
+		        YOU HAVE 8 SECONDS - GET READY
+		      </div>
+		    </div>
+		
+		  </div>
+		</div>
+		
 		<script src="js/custom.js"></script>		
-		<script src="js/jquery-1.10.1.min.js"></script>		
+		<script src="js/jquery-1.10.1.min.js"></script>	
+		<script src="js/bootstrap.js"></script>	
 		<script src="js/defs.js"></script>	
 		<script src="js/io.js"></script>	
 		<script src="js/board.js"></script>	
