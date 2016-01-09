@@ -1,9 +1,18 @@
 function lostMinigame(sq){
+	NewGame(oldFEN);
 	ClearPiece(sq);
 	RemoveGUIPiece(sq);
+	
+	var parsed = ParseMove(36,36);
+	MakeMove(parsed);
+	PrintBoard();
+	MoveGUIPiece(parsed);
+	CheckAndSet();
+	PreSearch();
 }
 
 function wonMinigame(sq){
+	NewGame(oldFEN);
 	if(Math.random()>0.5){
 		setJetpack(true);
 	}else{

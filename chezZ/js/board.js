@@ -325,7 +325,13 @@ function BoardToFen() {
 			fenStr += ' ';
 		}
 	}
-	fenStr += SideChar[GameBoard.side] + ' ';
+	//gunter
+	if(changeSide){
+		fenStr += SideChar[GameBoard.side^1] + ' ';
+		changeSide = false;
+	}else{
+		fenStr += SideChar[GameBoard.side] + ' ';
+	}
 	if(GameBoard.enPas == SQUARES.NO_SQ) {
 		fenStr += '- '
 	} else {

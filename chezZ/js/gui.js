@@ -164,17 +164,28 @@ function MakeUserMove() {
 	/* clemens end */
 
 	if(UserMove.from != SQUARES.NO_SQ && UserMove.to != SQUARES.NO_SQ) {
-	
+		var to = UserMove.to;
+		var file = FilesBrd[to]+1;
+		var rank = RanksBrd[to]+1;
+		
+		var domSq = $(".Square"+".rank"+rank + ".file"+file);
+		var isSpecialField = domSq.hasClass("specialField");
+		
 		console.log("User Move:" + PrSq(UserMove.from) + PrSq(UserMove.to));	
 		var parsed = ParseMove(UserMove.from,UserMove.to);
 		
 		if(parsed != NOMOVE) {
+			debugger;
 			MakeMove(parsed);
 			PrintBoard();
 			MoveGUIPiece(parsed);
 			CheckAndSet();
 			PreSearch();
+			if(isSpecialField)
+				changeSide = true;
 			
+			oldFEN = BoardToFen();
+			console.log(oldFEN);
 			/*gunter start*/
 			//Anmerkung - evtl Abspringen nach Deselect etc.
 			var to = UserMove.to;
