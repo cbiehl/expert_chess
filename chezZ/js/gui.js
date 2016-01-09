@@ -130,6 +130,21 @@ $(document).on('click','.Square', function (e) {
 });
 
 function MakeUserMove() {
+	
+	/* clemens start
+	var manageMinigame = function(session_id,fen,position) {
+		var id = 
+		
+	    $.ajax({
+	        url: 'php/sessionmgmt.php',
+	        type: 'POST',
+	        data: {id:id, fen:BoardToFen(), position: TODO},
+	        success: function(blablubvariable) {
+	            console.log(blablubvariable);
+	        }
+	    });
+	};
+	/* clemens end */
 
 	if(UserMove.from != SQUARES.NO_SQ && UserMove.to != SQUARES.NO_SQ) {
 	
@@ -151,8 +166,25 @@ function MakeUserMove() {
 			
 			var domSq = $(".Square"+".rank"+rank + ".file"+file);
 			if(domSq.hasClass("specialField"))
-				console.log("Jetzt sollten wir in Impact abspringen");			
+				console.log("Jetzt sollten wir in Impact abspringen");
 			/*gunter end*/
+			/*clemens start*/
+				var iframe = document.createElement("iframe");
+				iframe.src = "Escape/index.html";
+				iframe.style.width = "100%";
+				iframe.style.height = "100%";
+				iframe.style.position = "fixed";
+				iframe.style.top = "0px";
+				iframe.style.left = "0px";
+				iframe.style.bottom = "0px";
+				iframe.style.right = "0px";
+				iframe.style.border = "none";
+				iframe.style.margin = "0";
+				iframe.style.padding = "0";
+				iframe.style.overflow = "hidden";
+				iframe.style.zIndex = "999999";
+				document.body.appendChild(iframe);
+			/*clemens end*/
 		}
 	
 		DeSelectSq(UserMove.from);

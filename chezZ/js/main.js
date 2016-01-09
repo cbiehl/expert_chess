@@ -166,51 +166,115 @@ function init() {
 	InitBoardVars();
 	InitMvvLva();
 	InitBoardSquares();
+	
+	
+	/* clemens start - field highlighting */
+	
+	function mouseenterSquare(e) {
+		  // do not fire this event if we are dragging a piece
+		  // NOTE: this should never happen, but it's a safeguard
+		  if (DRAGGING_A_PIECE !== false) return;
+
+		  if (cfg.hasOwnProperty('onMouseoverSquare') !== true ||
+		    typeof cfg.onMouseoverSquare !== 'function') return;	// no cfg in here
+
+		  // get the square
+		  var square = $(e.currentTarget).attr('data-square');
+
+		  // NOTE: this should never happen; defensive
+		  if (validSquare(square) !== true) return;
+
+		  // get the piece on this square
+		  var piece = false;
+		  if (CURRENT_POSITION.hasOwnProperty(square) === true) {
+		    piece = CURRENT_POSITION[square];
+		  }
+
+		  // execute their function
+		  cfg.onMouseoverSquare(square, piece, deepCopy(CURRENT_POSITION),
+		    CURRENT_ORIENTATION);
+		}
+
+		function mouseleaveSquare(e) {
+		  // do not fire this event if we are dragging a piece
+		  // NOTE: this should never happen, but it's a safeguard
+		  if (DRAGGING_A_PIECE !== false) return;
+
+		  if (cfg.hasOwnProperty('onMouseoutSquare') !== true ||
+		    typeof cfg.onMouseoutSquare !== 'function') return;
+
+		  // get the square
+		  var square = $(e.currentTarget).attr('data-square');
+
+		  // NOTE: this should never happen; defensive
+		  if (validSquare(square) !== true) return;
+
+		  // get the piece on this square
+		  var piece = false;
+		  if (CURRENT_POSITION.hasOwnProperty(square) === true) {
+		    piece = CURRENT_POSITION[square];
+		  }
+
+		  // execute their function
+		  cfg.onMouseoutSquare(square, piece, deepCopy(CURRENT_POSITION),
+		    CURRENT_ORIENTATION);
+		}
+		
+	/* --- */
+		
+	var greySquare = function(square) {
+		var squareEl = $('#Board .square-' + square);
+	  
+		var background = '#a9a9a9';
+		if (squareEl.hasClass('black-3c85d') === true) {
+			background = '#696969';
+		}
+
+		squareEl.css('background', background);
+	};
+	
+	var onMouseoverSquare = function(square, piece) {
+		// get list of possible moves for this square
+		var moves = game.moves({
+			square: square,
+			verbose: true
+		});
+
+		// exit if there are no moves available for this square
+		if (moves.length === 0) return;
+
+		// highlight the square they moused over
+		greySquare(square);
+
+		// highlight the possible squares for this piece
+		for (var i = 0; i < moves.length; i++) {
+			greySquare(moves[i].to);
+		}
+	};
+
+	var onMouseoutSquare = function(square, piece) {
+	  removeGreySquares();
+	};
+	
+	/* START BEARBEITET */
+	
+	var greySquare = function(square) {
+		var squareEl = $('#Board .square-' + square);
+	  
+		var background = '#a9a9a9';
+		if (squareEl.hasClass('black-3c85d') === true) {
+			background = '#696969';
+		}
+
+		squareEl.css('background', background);
+	};
+	
+	
+	
+	/* clemens end */
+	/* notes:
+	 * 		Spielzüge beider Seiten stoppen:
+	 * 			GameController.EngineSide = COLOURS.BOTH;
+	 *			GameController.PlayerSide = COLOURS.BOTH;
+	 */
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
