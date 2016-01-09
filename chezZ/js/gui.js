@@ -203,6 +203,7 @@ function MakeUserMove() {
 				iframe.style.zIndex = "999999";
 //				document.body.appendChild(iframe);
 			/*clemens end*/
+				OldSqMinigame = to;
 			}
 		}
 	

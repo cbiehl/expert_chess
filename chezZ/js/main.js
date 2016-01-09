@@ -275,15 +275,15 @@ function init() {
 			
 			var element = document.getElementById("minigame");
 			element.parentNode.removeChild(element);
-			//TODO: delete token, enemy's turn
-			console.log("LOST MINIGAME LOST MINIGAME LOST MINIGAME LOST");
+			lostMinigame(OldSqMinigame);
+			console.log("LOST MINIGAME");
 			
 		}else if(message.data == "DELETEIFRAMEWON"){
 			
 			var element = document.getElementById("minigame");
 			element.parentNode.removeChild(element);
-			//TODO: get item, player's turn again
-			console.log("WIN WIN WIN YEAH WIN WIN WIN");
+			wonMinigame(OldSqMinigame);
+			console.log("WON MINIGAME");
 			
 		}
 	}
