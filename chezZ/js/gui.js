@@ -199,8 +199,17 @@ function MakeUserMove() {
 			/*gunter end*/
 			/*clemens start*/
 				var iframe = document.createElement("iframe");
+				var random_game = Math.random();
+				if(random_game <= 0.33){
+					iframe.src = "Escape/index.html";
+				}else if(random_game > 0.33 && random_game >= 0.66){
+					//Shoot the Fruit
+				}else{
+					//Monster
+				}
+				
+				iframe.src = "Escape/index.html"; //TODO
 				iframe.id = "minigame";
-				iframe.src = "Escape/index.html";
 				iframe.style.width = "100%";
 				iframe.style.height = "100%";
 				iframe.style.position = "fixed";
@@ -213,7 +222,14 @@ function MakeUserMove() {
 				iframe.style.padding = "0";
 				iframe.style.overflow = "hidden";
 				iframe.style.zIndex = "999999";
-				document.body.appendChild(iframe);
+				
+				$('#EscapeModal').modal('show');
+				
+				setTimeout(function(){
+					$('#EscapeModal').modal('hide');
+					document.body.appendChild(iframe);
+					iframe.contentWindow.focus();
+				}, 8000);
 			/*clemens end*/
 			}
 		}
