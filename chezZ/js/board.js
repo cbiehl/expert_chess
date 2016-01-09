@@ -294,7 +294,64 @@ function ParseFen(fen) {
 	GameBoard.posKey = GeneratePosKey();	
 	UpdateListsMaterial();
 }
-
+/*gunter start*/
+function BoardToFen() {
+	var fenStr = '';
+	var rank,file,sq,piece;
+	var emptyCount = 0;
+	
+	for(rank = RANKS.RANK_8; rank >= RANKS.RANK_1; rank--) {
+		emptyCount = 0; 
+		for(file = FILES.FILE_A; file <= FILES.FILE_H; file++) {
+			sq = FR2SQ(file,rank);
+			piece = GameBoard.pieces[sq];
+			if(piece == PIECES.EMPTY) {
+				emptyCount++;
+			} else {
+				if(emptyCount!=0) {
+					fenStr += String.fromCharCode('0'.charCodeAt() + emptyCount);
+				}
+				emptyCount = 0;
+				fenStr += PceChar[piece];
+			}
+		}
+		if(emptyCount!=0) {
+			fenStr += String.fromCharCode('0'.charCodeAt() + emptyCount);
+		}
+		
+		if(rank!=RANKS.RANK_1) {
+			fenStr += '/'
+		} else {
+			fenStr += ' ';
+		}
+	}
+	fenStr += SideChar[GameBoard.side] + ' ';
+	if(GameBoard.enPas == SQUARES.NO_SQ) {
+		fenStr += '- '
+	} else {
+		fenStr += PrSq(GameBoard.enPas) + ' ';
+	}
+	
+	if(GameBoard.castlePerm == 0) {
+		fenStr += '- '
+	} else {
+		if(GameBoard.castlePerm & CASTLEBIT.WKCA) fenStr += 'K';
+		if(GameBoard.castlePerm & CASTLEBIT.WQCA) fenStr += 'Q';
+		if(GameBoard.castlePerm & CASTLEBIT.BKCA) fenStr += 'k';
+		if(GameBoard.castlePerm & CASTLEBIT.BQCA) fenStr += 'q';
+	}
+	fenStr += ' ';
+	fenStr += GameBoard.fiftyMove;
+	fenStr += ' ';
+	var tempHalfMove = GameBoard.hisPly;
+	if(GameBoard.side == COLOURS.BLACK) {
+		tempHalfMove--;
+	}
+	fenStr += tempHalfMove/2;	
+	
+	return fenStr;
+}
+/*gunter end*/
 function PrintSqAttacked() {
 	
 	var sq,file,rank,piece;

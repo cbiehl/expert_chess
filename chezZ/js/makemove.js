@@ -56,7 +56,7 @@ function MovePiece(from, to) {
 }
 
 function MakeMove(move) {
-	
+	debugger;
 	var from = FROMSQ(move);
     var to = TOSQ(move);
     var side = GameBoard.side;	

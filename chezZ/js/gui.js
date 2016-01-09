@@ -46,6 +46,11 @@ function SetInitialBoardPieces() {
 			AddGUIPiece(sq120, pce);
 		}
 	}
+	
+	/*Gunter Start*/
+	if(hasMissile)
+		markAllBlackPawns();
+	/*Gunter end*/
 }
 
 function DeSelectSq(sq) {
@@ -79,31 +84,45 @@ function ClickedSquare(pageX, pageY) {
 	
 	var sq = FR2SQ(file,rank);
 	
-	console.log('Clicked sq:' + PrSq(sq));
-	
-	SetSqSelected(sq);	
+	//gunter - if anweisung
+	if(!hasMissile){
+		console.log('Clicked sq:' + PrSq(sq));
+		
+		SetSqSelected(sq);	
+	}
 	
 	return sq;
 }
 
 $(document).on('click','.Piece', function (e) {
-	console.log('Piece Click');
-	
-	if(UserMove.from == SQUARES.NO_SQ) {
-		UserMove.from = ClickedSquare(e.pageX, e.pageY);
-	} else {
-		UserMove.to = ClickedSquare(e.pageX, e.pageY);
+	//gunter - umschließende if anweisung
+	if(!hasMissile){
+		console.log('Piece Click');
+		if(UserMove.from == SQUARES.NO_SQ) {
+			UserMove.from = ClickedSquare(e.pageX, e.pageY);
+		} else {
+			UserMove.to = ClickedSquare(e.pageX, e.pageY);
+		}
+		
+		MakeUserMove();
+	} else{
+		var to = ClickedSquare(e.pageX, e.pageY);
+		if(GameBoard.pieces[to] == PIECES.bP){
+			//Kill the pawn on square to
+			playerUsesMissile(to);
+		}
+			
 	}
-	
-	MakeUserMove();
-	
 });
 
 $(document).on('click','.Square', function (e) {
-	console.log('Square Click');	
-	if(UserMove.from != SQUARES.NO_SQ) {
-		UserMove.to = ClickedSquare(e.pageX, e.pageY);
-		MakeUserMove();
+	//gunter - umschließende if anweisung
+	if(!hasMissile){
+		console.log('Square Click');	
+		if(UserMove.from != SQUARES.NO_SQ) {
+			UserMove.to = ClickedSquare(e.pageX, e.pageY);
+			MakeUserMove();
+		}
 	}
 
 });
@@ -113,7 +132,7 @@ function MakeUserMove() {
 	if(UserMove.from != SQUARES.NO_SQ && UserMove.to != SQUARES.NO_SQ) {
 	
 		console.log("User Move:" + PrSq(UserMove.from) + PrSq(UserMove.to));	
-		
+		debugger;
 		var parsed = ParseMove(UserMove.from,UserMove.to);
 		
 		if(parsed != NOMOVE) {
@@ -124,6 +143,7 @@ function MakeUserMove() {
 			PreSearch();
 			
 			/*gunter start*/
+			//Anmerkung - evtl Abspringen nach Deselect etc.
 			var to = UserMove.to;
 			var file = FilesBrd[to]+1;
 			var rank = RanksBrd[to]+1;
@@ -300,6 +320,8 @@ function CheckAndSet() {
 		GameController.GameOver = BOOL.FALSE;
 		$("#GameStatus").text('');
 	}
+	//gunter
+	document.getElementById("fenIn").value = BoardToFen();
 }
 
 function PreSearch() {

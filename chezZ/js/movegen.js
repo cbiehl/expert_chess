@@ -282,7 +282,6 @@ function GenerateCaptures() {
 	
 	if(GameBoard.side == COLOURS.WHITE) {
 		pceType = PIECES.wP;
-		
 		for(pceNum = 0; pceNum < GameBoard.pceNum[pceType]; ++pceNum) {
 			sq = GameBoard.pList[PCEINDEX(pceType, pceNum)];				
 			
