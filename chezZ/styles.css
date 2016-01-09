@@ -68,12 +68,13 @@
 	box-shadow: inset 0 0 20px red;
 }
 
-.pawnField{
+.markedField{
 	box-shadow: inset 0 0 30px green;	
 }
 
-
-
+.markedField.specialField{
+		box-shadow: inset 0 0 30px saddlebrown;	
+}
 
 
 

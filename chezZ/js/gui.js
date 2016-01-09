@@ -3,6 +3,10 @@ $('#Missile').click( function () {
 	setMissile(!hasMissile);
 });
 
+$('#Jetpack').click( function () {
+	setJetpack(!hasJetpack)
+});
+
 /*Gunter end*/
 
 $("#SetFen").click(function () {
@@ -98,7 +102,7 @@ function ClickedSquare(pageX, pageY) {
 
 $(document).on('click','.Piece', function (e) {
 	//gunter - umschließende if anweisung
-	if(!hasMissile){
+	if(!hasMissile && !hasJetpack){
 		console.log('Piece Click');
 		if(UserMove.from == SQUARES.NO_SQ) {
 			UserMove.from = ClickedSquare(e.pageX, e.pageY);
@@ -107,7 +111,7 @@ $(document).on('click','.Piece', function (e) {
 		}
 		
 		MakeUserMove();
-	} else{
+	} else if(hasMissile && !hasJetpack){
 		var to = ClickedSquare(e.pageX, e.pageY);
 		if(GameBoard.pieces[to] == PIECES.bP){
 			//Kill the pawn on square to
@@ -119,13 +123,26 @@ $(document).on('click','.Piece', function (e) {
 
 $(document).on('click','.Square', function (e) {
 	//gunter - umschließende if anweisung
-	if(!hasMissile){
+	if(!hasMissile && !hasJetpack){
 		console.log('Square Click');	
 		if(UserMove.from != SQUARES.NO_SQ) {
 			UserMove.to = ClickedSquare(e.pageX, e.pageY);
 			MakeUserMove();
 		}
 	}
+	/*gunter start*/
+	//use jetpack
+	if(hasJetpack){
+//		if(UserMove.from != SQUARES.NO_SQ) {
+			UserMove.to = ClickedSquare(e.pageX, e.pageY);
+			var rank = RanksBrd[UserMove.to] + 1;
+			var file = FilesBrd[UserMove.to] + 1;
+			frStr = ".Square"+".rank"+rank + ".file"+file;
+			if($(frStr).hasClass("markedField"))
+				useJetpack(36,UserMove.to);
+//		}		
+	}
+	/*gunter end*/
 
 });
 
@@ -183,7 +200,7 @@ function MakeUserMove() {
 				iframe.style.padding = "0";
 				iframe.style.overflow = "hidden";
 				iframe.style.zIndex = "999999";
-				document.body.appendChild(iframe);
+//				document.body.appendChild(iframe);
 			/*clemens end*/
 		}
 	

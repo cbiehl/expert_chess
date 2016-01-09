@@ -1,3 +1,69 @@
+function lostMinigame(sq){
+	//TODO: an Square sq Figur töten --> Vielleicht über FEN-String?
+}
+
+//jetpack functions
+function setJetpack(bool){
+	if(bool){
+		markAllJetpackSquares();
+		hasJetpack = true;
+	} else{
+		unmarkAllJetpackSquares();
+		hasJetpack = false;
+	}
+}
+
+function markAllJetpackSquares(){
+	//loop through all files and ranks
+	for(rank = RANKS.RANK_7; rank >= RANKS.RANK_2; rank--) {
+		for(file = FILES.FILE_A; file <= FILES.FILE_H; file++) {
+			sq = FR2SQ(file,rank);
+			piece = GameBoard.pieces[sq];
+			if(piece == PIECES.EMPTY){
+				frStr = ".Square"+".rank"+(rank+1) + ".file"+(file+1);
+				$(frStr).addClass("markedField");
+			}
+		}
+	}
+}
+
+function unmarkAllJetpackSquares(jumpedToSq){
+	//loop through all files and ranks
+	for(rank = RANKS.RANK_7; rank >= RANKS.RANK_2; rank--) {
+		for(file = FILES.FILE_A; file <= FILES.FILE_H; file++) {
+			sq = FR2SQ(file,rank);
+			piece = GameBoard.pieces[sq];
+			if(piece == PIECES.EMPTY){
+				frStr = ".Square"+".rank"+(rank+1) + ".file"+(file+1);
+				$(frStr).removeClass("markedField");
+			}
+		}
+	}
+	
+	var rank = RanksBrd[jumpedToSq] + 1;
+	var file = FilesBrd[jumpedToSq] + 1;
+	frStr = ".Square"+".rank"+rank + ".file"+file;
+	$(frStr).removeClass("markedField");	
+}
+
+function useJetpack(oldSq, jumpToSq){
+	GameBoard.pieces[jumpToSq] = GameBoard.pieces[oldSq];
+	GameBoard.pieces[oldSq] = PIECES.EMPTY;
+	var fenStr = BoardToFen();
+	NewGame(fenStr);
+	
+	hasJetpack = false;
+	unmarkAllJetpackSquares(jumpToSq);
+	
+	var parsed = ParseMove(36,36);
+	MakeMove(parsed);
+	PrintBoard();
+	MoveGUIPiece(parsed);
+	CheckAndSet();
+	PreSearch();
+}
+	
+//Missile functions
 function setMissile(bool){
 	if(bool){
 		markAllBlackPawns();
@@ -6,9 +72,6 @@ function setMissile(bool){
 		unmarkAllSquares(0);
 		hasMissile = false;
 	}
-}
-function lostMinigame(sq){
-	//TODO: an Square sq Figur töten --> Vielleicht über FEN-String?
 }
 
 function markAllBlackPawns(){
@@ -20,7 +83,7 @@ function markAllBlackPawns(){
 		var rank = RanksBrd[sq]+1;
 		var file = FilesBrd[sq]+1;
 		frStr = ".Square"+".rank"+rank + ".file"+file;
-		$(frStr).addClass("pawnField");
+		$(frStr).addClass("markedField");
 	}
 }
 
@@ -32,13 +95,13 @@ function unmarkAllSquares(oldPawnSquare){
 		var rank = RanksBrd[sq]+1;
 		var file = FilesBrd[sq]+1;
 		frStr = ".Square"+".rank"+rank + ".file"+file;
-		$(frStr).removeClass("pawnField");
+		$(frStr).removeClass("markedField");
 	}
 	
 	var rank = RanksBrd[oldPawnSquare] + 1;
 	var file = FilesBrd[oldPawnSquare] + 1;
 	frStr = ".Square"+".rank"+rank + ".file"+file;
-	$(frStr).removeClass("pawnField");	
+	$(frStr).removeClass("markedField");	
 }
 
 function playerUsesMissile(destination){
@@ -47,6 +110,7 @@ function playerUsesMissile(destination){
 	RemoveGUIPiece(destination);
 	hasMissile = false;
 	
+	//führt einen "ungültigen" Zug durch --> Seite wechselt
 	var parsed = ParseMove(36,36);
 	MakeMove(parsed);
 	PrintBoard();
