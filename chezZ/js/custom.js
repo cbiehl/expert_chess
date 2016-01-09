@@ -16,7 +16,7 @@ function wonMinigame(sq){
 	if(Math.random()>0.5){
 		setJetpack(true);
 	}else{
-		setMissile(true);
+		setJetpack(true);
 	}
 }
 
@@ -72,6 +72,14 @@ function useJetpack(oldSq, jumpToSq){
 	
 	hasJetpack = false;
 	unmarkAllJetpackSquares(jumpToSq);
+	var rank = RanksBrd[jumpToSq] + 1;
+	var file = FilesBrd[jumpToSq] + 1;
+	frStr = ".Square"+".rank"+rank + ".file"+file;
+	if($(frStr).hasClass("specialField")){
+//		setJetpack(true);
+		//Spiel aufrufen
+		return;
+	}
 	
 	var parsed = ParseMove(36,36);
 	MakeMove(parsed);
@@ -79,6 +87,9 @@ function useJetpack(oldSq, jumpToSq){
 	MoveGUIPiece(parsed);
 	CheckAndSet();
 	PreSearch();
+	
+	DeSelectSq(oldSq);
+	DeSelectSq(jumpToSq);
 }
 	
 //Missile functions
@@ -143,6 +154,8 @@ function playerUsesMissile(destination){
 	unmarkAllSquares(destination);
 }
 
+
+//ai functions
 function computerUsesMissile(){
 	var pceType = PIECES.wP;
 	var nr_of_wP = GameBoard.pceNum[pceType];
@@ -153,14 +166,63 @@ function computerUsesMissile(){
 		pawnNumber = Math.floor(Math.random() * (nr_of_wP));
 		
 		pawnToKill = GameBoard.pList[PCEINDEX(pceType, pawnNumber)];
-		//TODO: Kill pawn
-			//Set FEN-String? Schauen, was nach Capture Move passiert...
+		ClearPiece(pawnToKill);
+		RemoveGUIPiece(pawnToKill);
+		//TODO Statusleiste
+		console.log("Your pawn on square " +FileChar[FilesBrd[pawnToKill]]+RankChar[RanksBrd[pawnToKill]]+ " was killed!");
 	}
 	
 	
 	//TODO : return false / true -> Ausgabe, dass kein Bauer mehr auf dem Feld war?
 }
 
+function computerUsesJetpack(from){
+	var loop = true;
+	while(loop){
+		var rankmin = 1;
+		var rankmax = 6;
+		var sf_rank = Math.floor(Math.random() * (rankmax - rankmin + 1)) + rankmin;
+		
+		var filemin = 0;
+		var filemax = 7;
+		var sf_file = Math.floor(Math.random() * (filemax - filemin + 1)) + filemin;
+		
+		var sq_to = FR2SQ(sf_file,sf_rank);
+		if(GameBoard.pieces[sq_to] == PIECES.EMPTY){
+			var rank = RanksBrd[sq_to]+1;
+			var file = FilesBrd[sq_to]+1;
+			
+			var domSq = $(".Square"+".rank"+rank + ".file"+file);
+			var isSpecialField = domSq.hasClass("specialField");
+			if(!isSpecialField)
+				loop = false;
+		}
+	}
+	
+	GameBoard.pieces[sq_to] = GameBoard.pieces[from];
+	GameBoard.pieces[from] = PIECES.EMPTY;
+	var fenStr = BoardToFen();
+	NewGame(fenStr);
+	
+}
+
+function aiPlaysGame(to){
+	var random = Math.random();
+	if(random<0.8){
+		//won the game, use item
+		console.log("ai won the game");
+		debugger;
+		if(Math.random()<=0.5)
+			computerUsesMissile();
+		else
+			computerUsesJetpack(to);
+	}else{
+		//lost the game, kill the piece
+		ClearPiece(to);
+		RemoveGUIPiece(to);
+		console.log("ai lost the game");
+	}
+}
 
 
 /*Notizen:

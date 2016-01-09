@@ -106,7 +106,22 @@ $(document).on('click','.Piece', function (e) {
 		console.log('Piece Click');
 		if(UserMove.from == SQUARES.NO_SQ) {
 			UserMove.from = ClickedSquare(e.pageX, e.pageY);
+			/*gunter start*/
+			$(".markedField").removeClass("markedField");
+			for(index = GameBoard.moveListStart[GameBoard.ply]; index < GameBoard.moveListStart[GameBoard.ply + 1]; ++index) {
+				var moveList_from = FROMSQ(GameBoard.moveList[index]);
+				if(moveList_from == UserMove.from){
+					moveList_to = TOSQ(GameBoard.moveList[index]);
+					
+					var rank = RanksBrd[moveList_to] + 1;
+					var file = FilesBrd[moveList_to] + 1;
+					frStr = ".Square"+".rank"+rank + ".file"+file;
+					$(frStr).addClass("markedField");
+				}
+			}
+			/*gunter end*/
 		} else {
+			$(".markedField").removeClass("markedField");
 			UserMove.to = ClickedSquare(e.pageX, e.pageY);
 		}
 		
@@ -124,6 +139,7 @@ $(document).on('click','.Piece', function (e) {
 $(document).on('click','.Square', function (e) {
 	//gunter - umschließende if anweisung
 	if(!hasMissile && !hasJetpack){
+		$(".markedField").removeClass("markedField");
 		console.log('Square Click');	
 		if(UserMove.from != SQUARES.NO_SQ) {
 			UserMove.to = ClickedSquare(e.pageX, e.pageY);
@@ -175,7 +191,6 @@ function MakeUserMove() {
 		var parsed = ParseMove(UserMove.from,UserMove.to);
 		
 		if(parsed != NOMOVE) {
-			debugger;
 			MakeMove(parsed);
 			PrintBoard();
 			MoveGUIPiece(parsed);
@@ -188,11 +203,6 @@ function MakeUserMove() {
 			console.log(oldFEN);
 			/*gunter start*/
 			//Anmerkung - evtl Abspringen nach Deselect etc.
-			var to = UserMove.to;
-			var file = FilesBrd[to]+1;
-			var rank = RanksBrd[to]+1;
-			
-			var domSq = $(".Square"+".rank"+rank + ".file"+file);
 			if(domSq.hasClass("specialField")){
 				console.log("Jetzt sollten wir in Impact abspringen");
 				oldSqMinigame = to;
@@ -425,12 +435,22 @@ function StartSearch() {
 	SearchController.time = parseInt(tt) * 1000;
 	SearchPosition();
 	
+	var best = SearchController.best;
 	//TODO: Hier Checken, ob auf Feld getreten
-	debugger;
-	MakeMove(SearchController.best);
-	MoveGUIPiece(SearchController.best);
+	MakeMove(best);
+	MoveGUIPiece(best);
 	
+	var to = TOSQ(best);
+	var rank = RanksBrd[to]+1;
+	var file = FilesBrd[to]+1;
+	
+	var domSq = $(".Square"+".rank"+rank + ".file"+file);
+	var isSpecialField = domSq.hasClass("specialField");
+	setTimeout(function(){
+	if(isSpecialField)
+		aiPlaysGame(to);
 	CheckAndSet();
+	}, 1000);
 }
 
 
