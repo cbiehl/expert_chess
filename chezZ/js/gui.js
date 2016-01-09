@@ -217,6 +217,7 @@ function MakeUserMove() {
 				setTimeout(function(){
 					$('#EscapeModal').modal('hide');
 					document.body.appendChild(iframe);
+					iframe.contentWindow.focus();
 				}, 8000);
 			/*clemens end*/
 			}
