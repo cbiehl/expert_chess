@@ -278,11 +278,20 @@ function init() {
 			lostMinigame(oldSqMinigame);
 			console.log("LOST MINIGAME");
 			
-		}else if(message.data == "DELETEIFRAMEWON"){
+		}else if(message.data == "DELETEIFRAMEWONJETPACK"){
 			
 			var element = document.getElementById("minigame");
 			element.parentNode.removeChild(element);
-			wonMinigame(oldSqMinigame);
+			NewGame(oldFEN);
+			setJetpack(true);
+			console.log("WON MINIGAME");
+			
+		}else if()message.data == "DELETEIFRAMEWONMISSILE"){
+			
+			var element = document.getElementById("minigame");
+			element.parentNode.removeChild(element);
+			NewGame(oldFEN);
+			setMissile(true, 0);
 			console.log("WON MINIGAME");
 			
 		}

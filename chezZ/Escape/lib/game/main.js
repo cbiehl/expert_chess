@@ -28,7 +28,14 @@ MyGame = ig.Game.extend({
 		// Initialize your game here; bind keys etc.
 		ig.input.bind(ig.KEY.LEFT_ARROW, 'left');
 		ig.input.bind(ig.KEY.RIGHT_ARROW, 'right');
-		this.loadLevel(LevelEscapeLvl);
+		
+		$('#ModalIntro').modal('show');
+		
+		setTimeout(function() = { 
+			$('#ModalIntro').modal('hide');
+			this.loadLevel(LevelEscapeLvl); 
+		}, 5000);
+		
 		ig.game.spawnEntity('EntityCountdown',20,20);
 	},
 	
@@ -91,20 +98,48 @@ MyGame = ig.Game.extend({
 	youWon: function(){
 		console.log("You won");
 		this.stopGame();
-		this.spawnOverlay();
 		//clemens
-       	window.setTimeout(function(){ window.top.postMessage("DELETEIFRAMEWON", '*'); }, 3000);
+		//this.spawnOverlay();
+		
+		if(Math.random()>0.5){
+
+			$('#ModalOutroJetpack').modal('show');
+			
+			window.setTimeout(function(){ 
+				$('#ModalOutroJetpack').modal('hide');
+				window.top.postMessage("DELETEIFRAMEWONJETPACK", '*');
+				
+	       	}, 4000);
+			
+		}else{
+			$('#ModalOutroMissile').modal('show');
+			
+			window.setTimeout(function(){ 
+				$('#ModalOutroMissile').modal('hide');
+				window.top.postMessage("DELETEIFRAMEWONMISSILE", '*');
+				
+	       	}, 4000);
+		}
+		
 	},
+	
 	spawnOverlay: function(){
 		ig.game.spawnEntity('EntityWon',50,30);
 	},
+	
 	youLost: function(){
 		console.log('You are dead');
 		console.log('You lost');
 		ig.game.cntDown.pause();
 		ig.game.stopGame();
 		// clemens
-		window.setTimeout(function(){ window.top.postMessage("DELETEIFRAMELOST", '*'); }, 3000);
+		
+		$('#ModalOutroLost').modal('show');
+		
+		window.setTimeout(function(){ 
+			$('#ModalOutroLost').modal('hide');
+			window.top.postMessage("DELETEIFRAMELOST", '*'); 
+		}, 4000);
 	},
 	
 	stopGame: function(){
