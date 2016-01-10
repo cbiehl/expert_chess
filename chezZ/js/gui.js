@@ -223,15 +223,14 @@ function MakeUserMove() {
 			/*clemens start*/
 				var iframe = document.createElement("iframe");
 				var random_game = Math.random();
-				if(random_game <= 0.33){
+				if(random_game <= 0.5){
+					//Escape minigame
 					iframe.src = "Escape/index.html";
-				}else if(random_game > 0.33 && random_game >= 0.66){
-					//Shoot the Fruit
 				}else{
-					//Monster
+					//Defeat the Monster - jumpnrun minigame
+					iframe.src = "jumpnrun/index.html";
 				}
 				
-				iframe.src = "Escape/index.html"; //TODO
 				iframe.id = "minigame";
 				iframe.style.width = "100%";
 				iframe.style.height = "100%";
