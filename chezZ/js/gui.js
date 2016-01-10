@@ -233,10 +233,7 @@ function MakeUserMove() {
 				iframe.style.overflow = "hidden";
 				iframe.style.zIndex = "999999";
 				
-				$('#EscapeModal').modal('show');
-				
 				setTimeout(function(){
-					$('#EscapeModal').modal('hide');
 					document.body.appendChild(iframe);
 					iframe.contentWindow.focus();
 				}, 8000);
