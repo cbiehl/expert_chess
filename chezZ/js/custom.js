@@ -11,14 +11,14 @@ function lostMinigame(sq){
 	PreSearch();
 }
 
-function wonMinigame(sq){
-	NewGame(oldFEN);
-	if(Math.random()>0){
-		setMissile(true, 0);
-	}else{
-		setJetpack(true);
-	}
-}
+//function wonMinigame(sq){ --> umgezogen in die main.js
+//	NewGame(oldFEN);
+//	if(Math.random()>0.5){
+//		setMissile(true);
+//	}else{
+//		setJetpack(true);
+//	}
+//}
 
 //jetpack functions
 function setJetpack(bool){
