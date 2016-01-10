@@ -26,6 +26,10 @@ EntityLevelchange = ig.Entity.extend({
 	level: null,
 	
 	triggeredBy: function( entity, trigger ) {
+		
+		ig.game.youWon();
+		
+		/*
 		if( this.level ) {
 			var levelName = this.level.replace(/^(Level)?(\w)(\w*)/, function( m, l, a, b ) {
 				return a.toUpperCase() + b;
@@ -33,6 +37,7 @@ EntityLevelchange = ig.Entity.extend({
 			
 			ig.game.loadLevelDeferred( ig.global['Level'+levelName] );
 		}
+		*/
 	},
 	
 	update: function(){}

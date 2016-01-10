@@ -1,67 +1,8 @@
-ig.module( 'game.levels.grasslands' )
-.requires( 'impact.image','game.entities.trigger','game.entities.coin','game.entities.hurt','game.entities.player','game.entities.levelchange','game.entities.monster' )
+ig.module( 'game.levels.customlevel' )
+.requires( 'impact.image','game.entities.coin','game.entities.trigger','game.entities.hurt','game.entities.player','game.entities.levelchange','game.entities.monster' )
 .defines(function(){
-LevelGrasslands=/*JSON[*/{
+LevelCustomlevel=/*JSON[*/{
 	"entities": [
-		{
-			"type": "EntityTrigger",
-			"x": 980,
-			"y": 932,
-			"settings": {
-				"size": {
-					"x": 216,
-					"y": 48
-				},
-				"target": {
-					"1": "hurt100"
-				},
-				"wait": 0
-			}
-		},
-		{
-			"type": "EntityCoin",
-			"x": 2400,
-			"y": 328
-		},
-		{
-			"type": "EntityCoin",
-			"x": 1092,
-			"y": 696
-		},
-		{
-			"type": "EntityCoin",
-			"x": 1188,
-			"y": 740
-		},
-		{
-			"type": "EntityCoin",
-			"x": 3164,
-			"y": 188
-		},
-		{
-			"type": "EntityCoin",
-			"x": 996,
-			"y": 724
-		},
-		{
-			"type": "EntityCoin",
-			"x": 2328,
-			"y": 328
-		},
-		{
-			"type": "EntityHurt",
-			"x": 2396,
-			"y": 1268,
-			"settings": {
-				"name": "hurt100",
-				"damage": 100
-			}
-		},
-		{
-			"type": "EntityPlayer",
-			"x": 89,
-			"y": 822
-		},
 		{
 			"type": "EntityCoin",
 			"x": 2256,
@@ -81,6 +22,65 @@ LevelGrasslands=/*JSON[*/{
 				},
 				"wait": 0
 			}
+		},
+		{
+			"type": "EntityCoin",
+			"x": 1092,
+			"y": 696
+		},
+		{
+			"type": "EntityCoin",
+			"x": 1188,
+			"y": 740
+		},
+		{
+			"type": "EntityCoin",
+			"x": 3360,
+			"y": 308
+		},
+		{
+			"type": "EntityCoin",
+			"x": 2400,
+			"y": 328
+		},
+		{
+			"type": "EntityCoin",
+			"x": 996,
+			"y": 724
+		},
+		{
+			"type": "EntityTrigger",
+			"x": 980,
+			"y": 932,
+			"settings": {
+				"size": {
+					"x": 216,
+					"y": 48
+				},
+				"target": {
+					"1": "hurt100"
+				},
+				"wait": 0
+			}
+		},
+		{
+			"type": "EntityCoin",
+			"x": 2328,
+			"y": 328
+		},
+		{
+			"type": "EntityHurt",
+			"x": 2396,
+			"y": 1268,
+			"settings": {
+				"name": "hurt100",
+				"damage": 100
+			}
+		},
+		{
+			"type": "EntityPlayer",
+			"x": 89,
+			"y": 822
 		},
 		{
 			"type": "EntityCoin",
@@ -265,5 +265,5 @@ LevelGrasslands=/*JSON[*/{
 		}
 	]
 }/*]JSON*/;
-LevelGrasslandsResources=[new ig.Image('media/tiles-70.png'), new ig.Image('media/tiles-70.png')];
+LevelCustomlevelResources=[new ig.Image('media/tiles-70.png'), new ig.Image('media/tiles-70.png')];
 });

@@ -11,11 +11,12 @@ ig.module(
 	'plugins.gamepad',
 	
 	'game.entities.player',
-	'game.entities.blob',
+	//'game.entities.blob',
 	'game.entities.monster',
+	'game.entities.won',
 
-	'game.levels.title',
-	'game.levels.monsterjumpandrun'
+	//'game.levels.title',
+	'game.levels.customlevel'
 )
 .defines(function(){
 	
@@ -43,7 +44,7 @@ MyGame = ig.Game.extend({
 		this.font.letterSpacing = -2;		
 		
 		// Load the LevelGrasslands as required above ('game.level.grassland')
-		this.loadLevel( LevelMonsterjumpandrun );
+		this.loadLevel( LevelCustomlevel );
 	},
 
 	loadLevel: function( data ) {
@@ -130,6 +131,28 @@ MyGame = ig.Game.extend({
 		if( window.myTouchButtons ) {
 			window.myTouchButtons.draw(); 
 		}
+	},
+	
+	youWon: function(){
+		console.log("You won");
+		this.stopGame();
+		this.spawnOverlay();
+       	window.setTimeout(function(){ window.top.postMessage("DELETEIFRAMEWON", '*'); }, 3000);
+	},
+	
+	spawnOverlay: function(){
+		ig.game.spawnEntity('EntityWon',800,600);
+	},
+	
+	youLost: function(){
+		console.log('You are dead');
+		console.log('You lost');
+		ig.game.stopGame();
+		window.setTimeout(function(){ window.top.postMessage("DELETEIFRAMELOST", '*'); }, 3000);
+	},
+	
+	stopGame: function(){
+		ig.system.stopRunLoop();
 	}
 });
 
@@ -172,7 +195,8 @@ MyTitle = ig.Game.extend({
 		// so set the letter spacing to -2px.
 		this.font.letterSpacing = -2;
 
-		this.loadLevel( LevelTitle );
+		//this.loadLevel( LevelTitle );
+		this.loadLevel( LevelCustomlevel );
 		this.maxY = this.backgroundMaps[0].pxHeight - ig.system.height;
 	},
 
@@ -212,6 +236,7 @@ MyTitle = ig.Game.extend({
 			window.myTouchButtons.draw(); 
 		}
 	}
+	
 });
 
 

@@ -7,20 +7,21 @@ ig.module(
 .defines(function(){
 	
 EntityCoin = ig.Entity.extend({
-	size: {x: 36, y: 36},
+	size: {x: 40, y: 40},
 	
 	type: ig.Entity.TYPE.NONE,
 	checkAgainst: ig.Entity.TYPE.A, // Check against friendly
 	collides: ig.Entity.COLLIDES.NEVER,
 	
-	animSheet: new ig.AnimationSheet( 'media/coin.png', 36, 36 ),
+	animSheet: new ig.AnimationSheet( 'media/coin.png', 40, 40 ),
 	sfxCollect: new ig.Sound( 'media/sounds/coin.*' ),
 	
 	
 	init: function( x, y, settings ) {
 		this.parent( x, y, settings );
 		
-		this.addAnim( 'idle', 0.1, [0,0,0,0,0,0,0,0,0,1,2] );
+		//this.addAnim( 'idle', 0.1, [0,0,0,0,0,0,0,0,0,1,2] );
+		this.addAnim( 'idle', 0.1, [0,1] );
 	},
 	
 	

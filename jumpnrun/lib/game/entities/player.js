@@ -129,8 +129,10 @@ EntityPlayer = ig.Entity.extend({
 	kill: function() {
 		this.parent();
 
+		ig.game.youLost();
+		
 		// Reload this level
-		ig.game.reloadLevel();
+		//ig.game.reloadLevel();
 	},
 
 	giveCoins: function( amount ) {
