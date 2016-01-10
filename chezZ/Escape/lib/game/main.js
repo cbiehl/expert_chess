@@ -23,18 +23,13 @@ MyGame = ig.Game.extend({
 	time2Stripes:0,
 	time2street:0,
 	spawn:true,
+	start:true,
 	
 	init: function() {
 		// Initialize your game here; bind keys etc.
 		ig.input.bind(ig.KEY.LEFT_ARROW, 'left');
 		ig.input.bind(ig.KEY.RIGHT_ARROW, 'right');
-		
-		$('#ModalIntro').modal('show');
-		
-		setTimeout(function(){ 
-			$('#ModalIntro').modal('hide');
-			this.loadLevel(LevelEscapeLvl); 
-		}, 5000);
+		this.loadLevel(LevelEscapeLvl);
 		
 		ig.game.spawnEntity('EntityCountdown',20,20);
 	},
@@ -42,6 +37,20 @@ MyGame = ig.Game.extend({
 	update: function() {
 		// Update all entities and backgroundMaps
 		this.parent();
+		
+		if(this.start){
+			ig.system.stopRunLoop();
+			
+			$('#ModalIntro').modal('show');
+			
+			setTimeout(function(){ 
+				$('#ModalIntro').modal('hide');
+				ig.system.startRunLoop();
+			}, 5000);
+			
+			this.start = false;
+		}
+		
 		this.time2spawn = this.time2spawn-1;
 		if(this.time2spawn<0 && this.rocket.isAlive && this.spawn){
 			this.time2spawn = 20;

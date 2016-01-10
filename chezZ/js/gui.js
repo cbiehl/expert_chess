@@ -249,7 +249,7 @@ function MakeUserMove() {
 				setTimeout(function(){
 					document.body.appendChild(iframe);
 					iframe.contentWindow.focus();
-				}, 8000);
+				}, 500);
 			/*clemens end*/
 			}
 		}
