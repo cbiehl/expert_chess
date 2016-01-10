@@ -151,7 +151,7 @@ MyGame = ig.Game.extend({
 		this.stopGame();
 		
 		if(Math.random()>0.5){
-
+			
 			$('#ModalOutroJetpack').modal('show');
 			
 			window.setTimeout(function(){ 
