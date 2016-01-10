@@ -11,7 +11,7 @@ function lostMinigame(sq){
 	PreSearch();
 }
 
-//function wonMinigame(sq){ --> umgezogen in die main.js
+//function wonMinigame(sq){ // --> umgezogen in die main.js
 //	NewGame(oldFEN);
 //	if(Math.random()>0.5){
 //		setMissile(true);
