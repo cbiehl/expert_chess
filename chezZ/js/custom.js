@@ -13,8 +13,8 @@ function lostMinigame(sq){
 
 function wonMinigame(sq){
 	NewGame(oldFEN);
-	if(Math.random()>0.5){
-		setJetpack(true);
+	if(Math.random()>0){
+		setMissile(true, 0);
 	}else{
 		setJetpack(true);
 	}
@@ -25,9 +25,11 @@ function setJetpack(bool){
 	if(bool){
 		markAllJetpackSquares();
 		hasJetpack = true;
+		SetSqSelected(oldSqMinigame);
 	} else{
 		unmarkAllJetpackSquares();
 		hasJetpack = false;
+		DeSelectSq(oldSqMinigame);
 	}
 }
 
@@ -39,7 +41,8 @@ function markAllJetpackSquares(){
 			piece = GameBoard.pieces[sq];
 			if(piece == PIECES.EMPTY){
 				frStr = ".Square"+".rank"+(rank+1) + ".file"+(file+1);
-				$(frStr).addClass("markedField");
+				if(!($(frStr).hasClass("specialField")))
+					$(frStr).addClass("markedField");
 			}
 		}
 	}
@@ -93,13 +96,15 @@ function useJetpack(oldSq, jumpToSq){
 }
 	
 //Missile functions
-function setMissile(bool){
+function setMissile(bool, destination){
 	if(bool){
 		markAllBlackPawns();
 		hasMissile = true;
+		SetSqSelected(oldSqMinigame);
 	} else{
-		unmarkAllSquares(0);
+		unmarkAllSquares(destination);
 		hasMissile = false;
+		DeSelectSq(oldSqMinigame);
 	}
 }
 
@@ -151,7 +156,7 @@ function playerUsesMissile(destination){
 	document.getElementById("fenIn").value = BoardToFen();
 
 	//unmark all squares
-	unmarkAllSquares(destination);
+	setMissile(false, destination);
 }
 
 

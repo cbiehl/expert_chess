@@ -91,7 +91,7 @@ function ClickedSquare(pageX, pageY) {
 	var sq = FR2SQ(file,rank);
 	
 	//gunter - if anweisung
-	if(!hasMissile){
+	if(!hasMissile && !hasJetpack){
 		console.log('Clicked sq:' + PrSq(sq));
 		
 		SetSqSelected(sq);	
@@ -104,7 +104,19 @@ $(document).on('click','.Piece', function (e) {
 	//gunter - umschließende if anweisung
 	if(!hasMissile && !hasJetpack){
 		console.log('Piece Click');
-		if(UserMove.from == SQUARES.NO_SQ) {
+		debugger;
+		var pieceRank = this.classList[1][4] - 1;
+		var pieceFile = this.classList[2][4] - 1;
+		var pieceSq = FR2SQ(pieceFile,pieceRank);
+		var flagSameSq = false;
+		if(pieceSq == UserMove.from){
+			flagSameSq = true;
+		}
+		if(GameBoard.pieces[pieceSq] <= 6 && !flagSameSq){
+			DeSelectSq(UserMove.from);
+			UserMove.from = SQUARES.NO_SQ;
+		}
+		if(UserMove.from == SQUARES.NO_SQ && !flagSameSq) {
 			UserMove.from = ClickedSquare(e.pageX, e.pageY);
 			/*gunter start*/
 			$(".markedField").removeClass("markedField");
@@ -197,6 +209,7 @@ function MakeUserMove() {
 			CheckAndSet();
 			PreSearch();
 			if(isSpecialField)
+				console.log(changeSide);
 				changeSide = true;
 			
 			oldFEN = BoardToFen();
