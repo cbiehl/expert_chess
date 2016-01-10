@@ -31,7 +31,7 @@ MyGame = ig.Game.extend({
 		
 		$('#ModalIntro').modal('show');
 		
-		setTimeout(function() = { 
+		setTimeout(function(){ 
 			$('#ModalIntro').modal('hide');
 			this.loadLevel(LevelEscapeLvl); 
 		}, 5000);
