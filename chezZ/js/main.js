@@ -286,7 +286,7 @@ function init() {
 			setJetpack(true);
 			console.log("WON MINIGAME");
 			
-		}else if()message.data == "DELETEIFRAMEWONMISSILE"){
+		}else if(message.data == "DELETEIFRAMEWONMISSILE"){
 			
 			var element = document.getElementById("minigame");
 			element.parentNode.removeChild(element);
