@@ -4,7 +4,7 @@ $('#Missile').click( function () {
 });
 
 $('#Jetpack').click( function () {
-	setJetpack(!hasJetpack)
+	$(".Square.rank5.file5").addClass("specialField");
 });
 
 /*Gunter end*/
@@ -104,7 +104,6 @@ $(document).on('click','.Piece', function (e) {
 	//gunter - umschließende if anweisung
 	if(!hasMissile && !hasJetpack){
 		console.log('Piece Click');
-		debugger;
 		var pieceRank = this.classList[1][4] - 1;
 		var pieceFile = this.classList[2][4] - 1;
 		var pieceSq = FR2SQ(pieceFile,pieceRank);

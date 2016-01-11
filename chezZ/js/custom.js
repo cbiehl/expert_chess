@@ -1,5 +1,20 @@
+function changeImage(sq, string){
+	//change the image
+	var pce = GameBoard.pieces[sq];
+	var rank = RanksBrd[sq] + 1;
+	var file = FilesBrd[sq] + 1;
+	var frStr = ".Piece"+".rank"+rank + ".file"+file;
+	var domImg = $(frStr)[0];
+	
+	var sourcePath = "images/" + SideChar[PieceCol[pce]] + PceChar[pce].toUpperCase() + string +".png";
+	
+	domImg.src = sourcePath;
+}
+
 function lostMinigame(sq){
 	NewGame(oldFEN);
+	changeImage(sq,"_death");
+	setTimeout(function(){
 	ClearPiece(sq);
 	RemoveGUIPiece(sq);
 	
@@ -9,6 +24,7 @@ function lostMinigame(sq){
 	MoveGUIPiece(parsed);
 	CheckAndSet();
 	PreSearch();
+	}, 1000 );
 }
 
 //function wonMinigame(sq){ // --> umgezogen in die main.js
@@ -23,10 +39,12 @@ function lostMinigame(sq){
 //jetpack functions
 function setJetpack(bool){
 	if(bool){
+		changeImage(oldSqMinigame, "_jet");
 		markAllJetpackSquares();
 		hasJetpack = true;
 		SetSqSelected(oldSqMinigame);
 	} else{
+		changeImage(oldSqMinigame, "");
 		unmarkAllJetpackSquares();
 		hasJetpack = false;
 		DeSelectSq(oldSqMinigame);
@@ -98,10 +116,12 @@ function useJetpack(oldSq, jumpToSq){
 //Missile functions
 function setMissile(bool, destination){
 	if(bool){
+		changeImage(oldSqMinigame, "_missile");
 		markAllBlackPawns();
 		hasMissile = true;
 		SetSqSelected(oldSqMinigame);
 	} else{
+		changeImage(oldSqMinigame, "");
 		unmarkAllSquares(destination);
 		hasMissile = false;
 		DeSelectSq(oldSqMinigame);
@@ -140,28 +160,34 @@ function unmarkAllSquares(oldPawnSquare){
 
 function playerUsesMissile(destination){
 	console.log("Kill the pawn on square " + destination);
-	ClearPiece(destination);
-	RemoveGUIPiece(destination);
-	hasMissile = false;
+	unmarkAllSquares(destination);
+	changeImage(destination,"_death");
+	setTimeout(function(){
+		ClearPiece(destination);
+		RemoveGUIPiece(destination);
+		hasMissile = false;
+		
+		//führt einen "ungültigen" Zug durch --> Seite wechselt
+		var parsed = ParseMove(36,36);
+		MakeMove(parsed);
+		PrintBoard();
+		MoveGUIPiece(parsed);
+		CheckAndSet();
+		PreSearch();
+		
+		//update fen string  TODO: vllt auslagern - hier nicht so passend
+		document.getElementById("fenIn").value = BoardToFen();
 	
-	//führt einen "ungültigen" Zug durch --> Seite wechselt
-	var parsed = ParseMove(36,36);
-	MakeMove(parsed);
-	PrintBoard();
-	MoveGUIPiece(parsed);
-	CheckAndSet();
-	PreSearch();
-	
-	//update fen string  TODO: vllt auslagern - hier nicht so passend
-	document.getElementById("fenIn").value = BoardToFen();
-
-	//unmark all squares
-	setMissile(false, destination);
+		//unmark all squares
+		setMissile(false, destination);
+	}, 1000 );
 }
 
 
 //ai functions
-function computerUsesMissile(){
+function computerUsesMissile(from){
+	changeImage(from,"_missile");
+	setTimeout(function(){
 	var pceType = PIECES.wP;
 	var nr_of_wP = GameBoard.pceNum[pceType];
 	var pawnNumber;
@@ -171,18 +197,25 @@ function computerUsesMissile(){
 		pawnNumber = Math.floor(Math.random() * (nr_of_wP));
 		
 		pawnToKill = GameBoard.pList[PCEINDEX(pceType, pawnNumber)];
-		ClearPiece(pawnToKill);
-		RemoveGUIPiece(pawnToKill);
-		//TODO Statusleiste
-		console.log("Your pawn on square " +FileChar[FilesBrd[pawnToKill]]+RankChar[RanksBrd[pawnToKill]]+ " was killed!");
+		changeImage(pawnToKill,"_death");
+		setTimeout(function(){
+			ClearPiece(pawnToKill);
+			RemoveGUIPiece(pawnToKill);
+			//TODO Statusleiste
+			console.log("Your pawn on square " +FileChar[FilesBrd[pawnToKill]]+RankChar[RanksBrd[pawnToKill]]+ " was killed!");
+		}, 1000 );
 	}
-	
+	changeImage(from,"");
+	}, 1000 );	
 	
 	//TODO : return false / true -> Ausgabe, dass kein Bauer mehr auf dem Feld war?
 }
 
 function computerUsesJetpack(from){
-	var loop = true;
+	changeImage(from, "_jet");
+	setTimeout( function() {
+		var loop = true;
+
 	while(loop){
 		var rankmin = 1;
 		var rankmax = 6;
@@ -204,28 +237,33 @@ function computerUsesJetpack(from){
 		}
 	}
 	
+
+	
 	GameBoard.pieces[sq_to] = GameBoard.pieces[from];
 	GameBoard.pieces[from] = PIECES.EMPTY;
 	var fenStr = BoardToFen();
 	NewGame(fenStr);
-	
+	changeImage("");
+	}, 1000 );
 }
 
 function aiPlaysGame(to){
 	var random = Math.random();
-	if(random<0.8){
+	if(random<=0.8){
 		//won the game, use item
 		console.log("ai won the game");
-		debugger;
 		if(Math.random()<=0.5)
-			computerUsesMissile();
+			computerUsesMissile(to);
 		else
 			computerUsesJetpack(to);
 	}else{
 		//lost the game, kill the piece
+		changeImage(to,"_death");
+		setTimeout(function(){
 		ClearPiece(to);
 		RemoveGUIPiece(to);
 		console.log("ai lost the game");
+		}, 1000 );
 	}
 }
 
