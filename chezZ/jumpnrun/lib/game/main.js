@@ -11,10 +11,8 @@ ig.module(
 	'plugins.gamepad',
 	
 	'game.entities.player',
-	//'game.entities.blob',
 	'game.entities.monster',
 
-	//'game.levels.title',
 	'game.levels.customlevel'
 )
 .defines(function(){
