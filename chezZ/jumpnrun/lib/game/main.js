@@ -85,18 +85,18 @@ MyGame = ig.Game.extend({
 		// Update all entities and BackgroundMaps
 		this.parent();
 		
-		if(this.start){
-			ig.system.stopRunLoop();
-			
-			$('#ModalIntro').modal('show');
-			
-			setTimeout(function(){ 
-				$('#ModalIntro').modal('hide');
-				ig.system.startRunLoop();
-			}, 5000);
-			
-			this.start = false;
-		}
+//		if(this.start){ //modal for intro not necessary -> MyTitle
+//			ig.system.stopRunLoop();
+//			
+//			$('#ModalIntro').modal('show');
+//			
+//			setTimeout(function(){ 
+//				$('#ModalIntro').modal('hide');
+//				ig.system.startRunLoop();
+//			}, 5000);
+//			
+//			this.start = false;
+//		}
 		
 		// Camera follows the player
 		this.camera.follow( this.player );
@@ -206,8 +206,8 @@ MyTitle = ig.Game.extend({
 		// Bind keys
 		ig.input.bind( ig.KEY.LEFT_ARROW, 'left' );
 		ig.input.bind( ig.KEY.RIGHT_ARROW, 'right' );
-		ig.input.bind( ig.KEY.X, 'jump' );
-		ig.input.bind( ig.KEY.C, 'shoot' );
+		ig.input.bind( ig.KEY.Y, 'jump' );
+		ig.input.bind( ig.KEY.X, 'shoot' );
 
 		ig.input.bind( ig.GAMEPAD.PAD_LEFT, 'left' );
 		ig.input.bind( ig.GAMEPAD.PAD_RIGHT, 'right' );
@@ -258,7 +258,7 @@ MyTitle = ig.Game.extend({
 		
 		var startText = ig.ua.mobile
 			? 'Press Button to Play!'
-			: 'Press X or C to Play!';
+			: 'Press Y to Jump and X to shoot';
 		
 		this.font.draw( startText, cx, 420, ig.Font.ALIGN.CENTER);
 

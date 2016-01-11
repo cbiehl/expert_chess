@@ -2,7 +2,8 @@ ig.module(
 	'game.entities.monster'
 )
 .requires(
-	'impact.entity'
+	'impact.entity',
+	'game.entities.monstershot'
 )
 .defines(function(){
 	
@@ -43,11 +44,14 @@ EntityMonster = ig.Entity.extend({
 		) {
 			this.flip = !this.flip;
 			
-			// We have to move the offset.x around a bit when going
-			// in reverse direction, otherwise the blob's hitbox will
-			// be at the tail end.
-			//this.offset.x = this.flip ? 0 : 24;
+			var x = Math.random() * 100;
+			var y = Math.random() * 100;
+			
 		}
+		
+//		setTimeout(function(){  //TODO: let monster shoot and add damage to player
+//			ig.game.spawnEntity( EntityMonstershot, this.pos.x, this.pos.y, {flip:this.flip} );
+//		}, 3000);
 		
 		var xdir = this.flip ? -1 : 1;
 		this.vel.x = this.speed * xdir;

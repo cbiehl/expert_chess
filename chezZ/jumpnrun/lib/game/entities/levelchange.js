@@ -1,15 +1,3 @@
-/*
-This entity calls ig.game.loadLevel() when its triggeredBy() method is called -
-usually through an EntityTrigger entity.
-
-
-Keys for Weltmeister:
-
-level
-	Name of the level to load. E.g. "LevelTest1" or just "test1" will load the 
-	'LevelTest1' level.
-*/
-
 ig.module(
 	'game.entities.levelchange'
 )
@@ -24,9 +12,11 @@ EntityLevelchange = ig.Entity.extend({
 	
 	size: {x: 32, y: 32},
 	level: null,
+	sfxWon: new ig.Sound( 'media/sounds/youwin.*' ),
 	
 	triggeredBy: function( entity, trigger ) {
 		
+		this.sfxWon.play();
 		ig.game.youWon();
 		
 		/*
