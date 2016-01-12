@@ -19,9 +19,9 @@ EntityMonster = ig.Entity.extend({
 	
 	health: 3,
 	
-	
 	speed: 40,
 	flip: false,
+	shoot: 0,
 	
 	animSheet: new ig.AnimationSheet( 'media/EntityMonster.png', 160, 189 ),
 	sfxDie: new ig.Sound( 'media/sounds/blob-die.*' ),
@@ -49,9 +49,15 @@ EntityMonster = ig.Entity.extend({
 			
 		}
 		
-//		setTimeout(function(){  //TODO: let monster shoot and add damage to player
-//			ig.game.spawnEntity( EntityMonstershot, this.pos.x, this.pos.y, {flip:this.flip} );
-//		}, 3000);
+		this.shoot += 1;
+		
+		if(this.shoot == 50){
+			var x = this.pos.x;
+			var y = this.pos.y;
+			
+			ig.game.spawnEntity( EntityMonstershot, x, y, {flip:this.flip} );
+			this.shoot = 0;
+		}
 		
 		var xdir = this.flip ? -1 : 1;
 		this.vel.x = this.speed * xdir;

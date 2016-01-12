@@ -144,28 +144,41 @@ MyGame = ig.Game.extend({
 		}
 	},
 	
-	youWon: function(){
+	youWon: function(arg){
 		console.log("You won");
 		this.stopGame();
 		
-		if(Math.random()>0.5){
+		if(arg == "europe"){
 			
-			$('#ModalOutroJetpack').modal('show');
+			$('#ModalOutroLostEurope').modal('show');
 			
 			window.setTimeout(function(){ 
-				$('#ModalOutroJetpack').modal('hide');
-				window.top.postMessage("DELETEIFRAMEWONJETPACK", '*');
-				
-	       	}, 4000);
+				$('#ModalOutroLostEurope').modal('hide');
+				window.top.postMessage("DELETEIFRAMELOST", '*'); 
+			}, 12000);
 			
 		}else{
-			$('#ModalOutroMissile').modal('show');
-			
-			window.setTimeout(function(){ 
-				$('#ModalOutroMissile').modal('hide');
-				window.top.postMessage("DELETEIFRAMEWONMISSILE", '*');
+		
+			if(Math.random()>0.5){
 				
-	       	}, 4000);
+				$('#ModalOutroJetpack').modal('show');
+				
+				window.setTimeout(function(){ 
+					$('#ModalOutroJetpack').modal('hide');
+					window.top.postMessage("DELETEIFRAMEWONJETPACK", '*');
+					
+		       	}, 4000);
+				
+			}else{
+				$('#ModalOutroMissile').modal('show');
+				
+				window.setTimeout(function(){ 
+					$('#ModalOutroMissile').modal('hide');
+					window.top.postMessage("DELETEIFRAMEWONMISSILE", '*');
+					
+		       	}, 4000);
+			}
+		
 		}
 	},
 	
@@ -257,8 +270,8 @@ MyTitle = ig.Game.extend({
 		this.title.draw( cx - this.title.width/2, 60 );
 		
 		var startText = ig.ua.mobile
-			? 'Press Button to Play!'
-			: 'Press Y to Jump and X to shoot';
+			? 'Press Button to Play! Attention: You have to collect all of the money bags!'
+			: 'Press Y to Jump and X to shoot. Attention: You have to collect all of the money bags!';
 		
 		this.font.draw( startText, cx, 420, ig.Font.ALIGN.CENTER);
 

@@ -16,8 +16,12 @@ EntityLevelchange = ig.Entity.extend({
 	
 	triggeredBy: function( entity, trigger ) {
 		
-		this.sfxWon.play();
-		ig.game.youWon();
+		if(entity.coins == 9){
+			this.sfxWon.play();
+			ig.game.youWon("nope");
+		}else{
+			ig.game.youWon("europe");
+		}
 		
 		/*
 		if( this.level ) {
