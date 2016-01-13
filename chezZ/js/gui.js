@@ -1,6 +1,10 @@
 /*Gunter*/
 $('#Missile').click( function () {
-	setMissile(!hasMissile);
+	for(var r =3;r<=6;r++){
+		for(var f=1;f<=8;f++){
+			$(".Square.rank"+r+".file"+f).addClass("specialField");
+		}
+	}
 });
 
 $('#Jetpack').click( function () {
@@ -102,6 +106,7 @@ function ClickedSquare(pageX, pageY) {
 
 $(document).on('click','.Piece', function (e) {
 	//gunter - umschließende if anweisung
+	debugger;
 	if(!hasMissile && !hasJetpack){
 		console.log('Piece Click');
 		var pieceRank = this.classList[1][4] - 1;
@@ -128,6 +133,9 @@ $(document).on('click','.Piece', function (e) {
 					var file = FilesBrd[moveList_to] + 1;
 					frStr = ".Square"+".rank"+rank + ".file"+file;
 					$(frStr).addClass("markedField");
+					var parsed = ParseMove(moveList_from,moveList_to);
+					if(parsed == NOMOVE)
+						$(frStr).removeClass("markedField");
 				}
 			}
 			/*gunter end*/
@@ -200,7 +208,6 @@ function MakeUserMove() {
 		
 		console.log("User Move:" + PrSq(UserMove.from) + PrSq(UserMove.to));	
 		var parsed = ParseMove(UserMove.from,UserMove.to);
-		
 		if(parsed != NOMOVE) {
 			MakeMove(parsed);
 			PrintBoard();

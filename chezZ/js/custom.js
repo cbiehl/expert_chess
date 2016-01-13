@@ -5,7 +5,7 @@ function changeImage(sq, string){
 	var file = FilesBrd[sq] + 1;
 	var frStr = ".Piece"+".rank"+rank + ".file"+file;
 	var domImg = $(frStr)[0];
-	
+
 	var sourcePath = "images/" + SideChar[PieceCol[pce]] + PceChar[pce].toUpperCase() + string +".png";
 	
 	domImg.src = sourcePath;
@@ -243,7 +243,7 @@ function computerUsesJetpack(from){
 	GameBoard.pieces[from] = PIECES.EMPTY;
 	var fenStr = BoardToFen();
 	NewGame(fenStr);
-	changeImage("");
+	changeImage(sq_to, "");
 	}, 1000 );
 }
 
