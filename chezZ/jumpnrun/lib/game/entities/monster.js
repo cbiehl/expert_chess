@@ -24,7 +24,7 @@ EntityMonster = ig.Entity.extend({
 	shoot: 0,
 	
 	animSheet: new ig.AnimationSheet( 'media/EntityMonster.png', 160, 189 ),
-	sfxDie: new ig.Sound( 'media/sounds/blob-die.*' ),
+	sfxDie: new ig.Sound( 'media/sounds/monster_die.*' ),
 	
 	
 	init: function( x, y, settings ) {
@@ -52,7 +52,7 @@ EntityMonster = ig.Entity.extend({
 		
 		this.shoot += 1;
 		
-		if(this.shoot == 50 && ( ig.game.player.pos.x > 1280.0 ) ){
+		if(this.shoot == 50 && ig.game.player.pos.x > 1300 ){
 			var x = this.pos.x;
 			var y = this.pos.y;
 			
