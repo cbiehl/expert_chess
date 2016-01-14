@@ -8,15 +8,17 @@ ig.module(
 
 EntityWhite = ig.Entity.extend({
 	
-	size: {x:8, y:8},
+	size: {x:40, y:40},
 	collides: ig.Entity.COLLIDES.NEVER,
 	checkAgainst: ig.Entity.TYPE.NONE,
 	type: ig.Entity.TYPE.NONE,
-	animSheet: new ig.AnimationSheet( 'media/white.png', 8, 8 ),
+	animSheet: new ig.AnimationSheet( 'media/white.png', 40, 40 ),
 	
 	init: function( x, y, settings ) {
 		this.parent( x, y, settings );
 		this.addAnim( 'idle', 1, [0] );
+		this.maxVel.x = 200;
+		this.maxVel.y = 300;
 	},
 	
 //	handleMovementTrace: function(res){
@@ -27,7 +29,7 @@ EntityWhite = ig.Entity.extend({
 //	},
 	
 	update: function(){
-		if(this.pos.y>=160){
+		if(this.pos.y>=900){
 			this.kill();
 		}
 //		if(this.collision){

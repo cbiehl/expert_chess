@@ -8,18 +8,20 @@ ig.module(
 
 EntityBall = ig.Entity.extend({
 	
-	size: {x:24, y:24},
-	collides: ig.Entity.COLLIDES.ACTIVE,
-	type: ig.Entity.TYPE.A,
+	size: {x:121, y:160},
+	collides: ig.Entity.COLLIDES.PASSIVE,
+	type: ig.Entity.TYPE.B,
 	checkAgainst: ig.Entity.TYPE.A,
 	collision:false,
 	
-	animSheet: new ig.AnimationSheet( 'media/hit_comp.png', 24, 24 ),
+	animSheet: new ig.AnimationSheet( 'media/hit_comp_new.png', 121, 160 ),
 	
 	init: function( x, y, settings ) {
 		this.parent( x, y, settings );
-		var i = Math.floor(Math.random()*3);
+		var i = Math.floor(Math.random()*2);
 		this.addAnim( 'idle', 1, [i] );
+		this.maxVel.x = 200;
+		this.maxVel.y = 350;
 	},
 	
 //	handleMovementTrace: function(res){
@@ -30,7 +32,7 @@ EntityBall = ig.Entity.extend({
 //	},
 	
 	update: function(){
-		if(this.pos.y>=136){
+		if(this.pos.y>=850){
 			this.kill();
 			if(ig.game.rocket.isAlive)
 				ig.game.rocket.addScore(1);
@@ -45,10 +47,14 @@ EntityBall = ig.Entity.extend({
 	},
 	
 	check: function(other){
-		other.setLiveStatus(false);
-		other.kill();
-		this.kill();
-		ig.game.youLost();
+		debugger;
+		if(this.pos.y<742){
+			other.setLiveStatus(false);
+			other.kill();
+			this.kill();
+			ig.game.youLost();
+		}
+	this.parent();
 	}
 
 });

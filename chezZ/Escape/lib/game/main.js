@@ -10,10 +10,58 @@ ig.module(
 	'game.entities.white',
 	'game.entities.street',
 	'game.entities.countdown',
-	'game.entities.won'
+	'game.entities.won',
+	'game.entities.background'
 )
 .defines(function(){
 
+	MyTitle = ig.Game.extend({
+		clearColor: "#d0f4f7",
+		gravity: 800,
+
+		// The title image
+		title: new ig.Image( 'media/title.png' ),
+		background: new ig.Image('media/background.png'),
+		// Load a font
+		font: new ig.Font( 'media/fredoka-one.font.png' ),
+
+		init: function() {
+			// Bind keys
+			ig.input.bind( ig.KEY.LEFT_ARROW, 'left' );
+			ig.input.bind( ig.KEY.RIGHT_ARROW, 'right' );
+			ig.input.bind( ig.KEY.UP_ARROW, 'up' );
+			ig.input.bind( ig.KEY.DOWN_ARROW, 'down' );
+
+			// We want the font's chars to slightly touch each other,
+			// so set the letter spacing to -2px.
+			this.font.letterSpacing = -2;
+
+		},
+
+		update: function() {
+			// Check for buttons; start the game if pressed
+			if( ig.input.pressed('left') || ig.input.pressed('right')|| ig.input.pressed('up')|| ig.input.pressed('down') ) {
+				ig.system.setGame( MyGame );
+				return;
+			}
+			
+			this.parent();
+		},
+
+		draw: function() {
+			this.parent();
+
+			var cx = ig.system.width/2;
+			this.title.draw( cx - this.title.width/2, 60 );
+			this.background.draw(cx - this.background.width/2, 300);
+			var startText = 'Press an arrow key to play!';
+			
+			this.font.draw( startText, cx, 420, ig.Font.ALIGN.CENTER);
+
+		}
+		
+	});	
+	
 MyGame = ig.Game.extend({
 	
 	// Load a font
@@ -23,58 +71,116 @@ MyGame = ig.Game.extend({
 	time2Stripes:0,
 	time2street:0,
 	spawn:true,
-	start:true,
+//	start:true,
+	twoObstacles:false,
+	speed: 300,
+//	backgroundImage:new ig.Image('media/black_2.png'),
+//	background,
 	
 	init: function() {
+		var data = [
+		            [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+		            [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+		            [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+		            [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+		            [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+		            [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+		            [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+		            [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+		            [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+		            [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+		            [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+		            [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+		            [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+		            [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+		            [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+		            [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+		            [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+		            [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+		            [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+		            [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+		        ];
+//		this.background = new ig.BackgroundMap(32,data,'media/black_2.png'),
+		
 		// Initialize your game here; bind keys etc.
+//		this.background.setScreenPos(0,0);
+//		ig.game.bg = this.background;
 		ig.input.bind(ig.KEY.LEFT_ARROW, 'left');
 		ig.input.bind(ig.KEY.RIGHT_ARROW, 'right');
 		this.loadLevel(LevelEscapeLvl);
+
+		ig.game.spawnEntity('EntityBackground',0,0);
 		
 		ig.game.spawnEntity('EntityCountdown',20,20);
+		for(var k =0; k<=900; k+=300){
+			for (var i = 0; i<=200; i+=40){
+				var newStripe = ig.game.spawnEntity('EntityWhite', 360,-100+k+i);
+				newStripe.zIndex = -10;
+				newStripe.vel.y=this.speed;
+				
+				var newStripe = ig.game.spawnEntity('EntityWhite', 720,-100+k+i);
+				newStripe.zIndex = -10;
+				newStripe.vel.y=this.speed;
+				
+			}
+		}
+		
 	},
 	
 	update: function() {
 		// Update all entities and backgroundMaps
 		this.parent();
 		
-		if(this.start){
-			ig.system.stopRunLoop();
-			
-			$('#ModalIntro').modal('show');
-			
-			setTimeout(function(){ 
-				$('#ModalIntro').modal('hide');
-				ig.system.startRunLoop();
-			}, 5000);
-			
-			this.start = false;
-		}
+//		if(this.start){
+//			ig.system.stopRunLoop();
+//			
+//			$('#ModalIntro').modal('show');
+//			
+//			setTimeout(function(){ 
+//				$('#ModalIntro').modal('hide');
+//				ig.system.startRunLoop();
+//			}, 5000);
+//			
+//			this.start = false;
+//		}
 		
 		this.time2spawn = this.time2spawn-1;
 		if(this.time2spawn<0 && this.rocket.isAlive && this.spawn){
-			this.time2spawn = 20;
-			var newObstacle = ig.game.spawnEntity('EntityBall', Math.random()*200+8,0);
+			this.time2spawn = 30;
+			var xPosition = Math.random()*900+8;
+			var newObstacle = ig.game.spawnEntity('EntityBall', xPosition,-20);
 			newObstacle.zIndex = 0;
-			newObstacle.vel.y=70;
+			newObstacle.vel.y=this.speed;
+			
+			this.twoObstacles = !this.twoObstacles;
+			if(this.twoObstacles){
+				var difference = Math.random()*300+150;
+				if(xPosition<500){
+					var newObstacle = ig.game.spawnEntity('EntityBall', xPosition+difference,-30);
+					newObstacle.zIndex = 0;
+					newObstacle.vel.y=this.speed;
+				}	
+				else{
+					var newObstacle = ig.game.spawnEntity('EntityBall', xPosition-difference,-30);
+					newObstacle.zIndex = 0;
+					newObstacle.vel.y=this.speed;
+				}
+			}
 		}
 		// Add your own, additional update code here
 		
 		this.time2Stripes = this.time2Stripes-1;
 		if(this.time2Stripes<0){
-			this.time2Stripes = 40;
-			for (var i = 0; i<=32; i+=8){
-				var newStripe = ig.game.spawnEntity('EntityWhite', 80,-32+i);
+			this.time2Stripes = 60;
+			for (var i = 0; i<=200; i+=40){
+				var newStripe = ig.game.spawnEntity('EntityWhite', 360,-400+i);
 				newStripe.zIndex = -10;
-				newStripe.vel.y=70;
+				newStripe.vel.y=this.speed;
 				
-				var newStripe = ig.game.spawnEntity('EntityWhite', 160,-32+i);
+				var newStripe = ig.game.spawnEntity('EntityWhite', 720,-400+i);
 				newStripe.zIndex = -10;
-				newStripe.vel.y=70;
+				newStripe.vel.y=this.speed;
 				
-				var newStripe = ig.game.spawnEntity('EntityWhite', 240,-32+i);
-				newStripe.zIndex = -10;
-				newStripe.vel.y=70;
 			}
 		}
 		
@@ -92,16 +198,15 @@ MyGame = ig.Game.extend({
 	draw: function() {
 		// Draw all entities and backgroundMaps
 		this.parent();
-		
-		
+
 		// Add your own drawing code here
 		var x = ig.system.width/2,
 			y = ig.system.height/2;
 		
-		this.font.draw( 'Avoid a collision!', x, y, ig.Font.ALIGN.CENTER );
-		x = 10;
-		y=0;
-		this.font.draw( 'x ' + this.rocket.score, x, y+10 )
+//		this.font.draw( 'Avoid a collision!', x, y, ig.Font.ALIGN.CENTER );
+//		x = 10;
+//		y=0;
+//		this.font.draw( 'x ' + this.rocket.score, x, y+10 )
 	},
 	
 	youWon: function(){
@@ -159,6 +264,6 @@ MyGame = ig.Game.extend({
 
 // Start the Game with 60fps, a resolution of 320x240, scaled
 // up by a factor of 2
-ig.main( '#canvas', MyGame, 60, 240, 160, 3 );
+ig.main( '#canvas', MyTitle, 60, 1080, 800, 1 );
 
 });

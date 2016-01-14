@@ -40,7 +40,7 @@ EntityCountdown = ig.Entity.extend({
 	       	ig.game.rocket.escapeFct();
 	    }
 	        	
-    	if(this.countdown.delta()>-1.5)
+    	if(this.countdown.delta()>-2)
     		ig.game.spawn = false;
     	
         this.parent();
