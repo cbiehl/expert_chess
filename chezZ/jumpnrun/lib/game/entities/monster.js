@@ -32,6 +32,7 @@ EntityMonster = ig.Entity.extend({
 		
 		this.addAnim( 'crawl', 0.2, [0,1] );
 		this.addAnim( 'dead', 1, [2] );
+		ig.game.monster = this;
 	},
 	
 	
@@ -51,7 +52,7 @@ EntityMonster = ig.Entity.extend({
 		
 		this.shoot += 1;
 		
-		if(this.shoot == 50){
+		if(this.shoot == 50 && ( ig.game.player.pos.x > 1280.0 ) ){
 			var x = this.pos.x;
 			var y = this.pos.y;
 			
@@ -62,6 +63,10 @@ EntityMonster = ig.Entity.extend({
 		var xdir = this.flip ? -1 : 1;
 		this.vel.x = this.speed * xdir;
 		this.currentAnim.flip.x = !this.flip;
+		
+		if(this.shoot >= 50){
+			this.shoot = 0;
+		}
 		
 		this.parent();
 	},
