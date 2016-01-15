@@ -121,7 +121,6 @@ MyGame = ig.Game.extend({
 				var newStripe = ig.game.spawnEntity('EntityWhite', 720,-100+k+i);
 				newStripe.zIndex = -10;
 				newStripe.vel.y=this.speed;
-				
 			}
 		}
 		
@@ -146,7 +145,7 @@ MyGame = ig.Game.extend({
 		
 		this.time2spawn = this.time2spawn-1;
 		if(this.time2spawn<0 && this.rocket.isAlive && this.spawn){
-			this.time2spawn = 30;
+			this.time2spawn = 45;
 			var xPosition = Math.random()*900+8;
 			var newObstacle = ig.game.spawnEntity('EntityBall', xPosition,-20);
 			newObstacle.zIndex = 0;

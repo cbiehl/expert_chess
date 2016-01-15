@@ -47,8 +47,7 @@ EntityBall = ig.Entity.extend({
 	},
 	
 	check: function(other){
-		debugger;
-		if(this.pos.y<742){
+		if(this.pos.y<722){
 			other.setLiveStatus(false);
 			other.kill();
 			this.kill();

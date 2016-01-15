@@ -106,7 +106,6 @@ function ClickedSquare(pageX, pageY) {
 
 $(document).on('click','.Piece', function (e) {
 	//gunter - umschließende if anweisung
-	debugger;
 	if(!hasMissile && !hasJetpack){
 		console.log('Piece Click');
 		var pieceRank = this.classList[1][4] - 1;
@@ -153,7 +152,7 @@ $(document).on('click','.Piece', function (e) {
 		}
 			
 	}
-});
+	});
 
 $(document).on('click','.Square', function (e) {
 	//gunter - umschließende if anweisung
@@ -462,8 +461,11 @@ function StartSearch() {
 	var domSq = $(".Square"+".rank"+rank + ".file"+file);
 	var isSpecialField = domSq.hasClass("specialField");
 	setTimeout(function(){
-	if(isSpecialField)
+	if(isSpecialField){
+		AI_PLAYS_GAME = true;
 		aiPlaysGame(to);
+		AI_PLAYS_GAME = false;
+	}
 	CheckAndSet();
 	}, 1000);
 }

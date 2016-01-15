@@ -12,7 +12,7 @@ EntityCountdown = ig.Entity.extend({
     collides: ig.Entity.COLLIDES.NONE,
     stop:false,
     
-    animSheet: new ig.AnimationSheet( 'media/countdown3.png', 16, 16 ),
+    animSheet: new ig.AnimationSheet( 'media/countdown4.png', 48, 48 ),
     
     init: function( x, y, settings ) {
         this.parent( x, y, settings );

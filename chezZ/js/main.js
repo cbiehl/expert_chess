@@ -271,6 +271,7 @@ function init() {
 	
 	/* minigame integration */
 	window.onmessage = function(message){
+		debugger;
 		if(message.data == "DELETEIFRAMELOST"){
 			
 			var element = document.getElementById("minigame");
@@ -294,6 +295,11 @@ function init() {
 			setMissile(true, 0);
 			console.log("WON MINIGAME");
 			
+		}else if(message.data == "DELETEIFRAMEWON2X"){
+			var element = document.getElementById("minigame");
+			element.parentNode.removeChild(element);
+			NewGame(oldFEN);
+			console.log("WON MINIGAME");
 		}
 	}
 	
