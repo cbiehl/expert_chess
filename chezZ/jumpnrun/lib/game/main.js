@@ -132,7 +132,7 @@ MyGame = ig.Game.extend({
 
 			// We only want to draw the 0th tile of coin sprite-sheet
 			x += 48;
-			this.coinIcon.drawTile( x, y+6, 0, 36 );
+			this.coinIcon.drawTile( x, y+6, 0, 40 );
 
 			x += 42;
 			this.font.draw( 'x ' + this.player.coins, x, y+10 )
@@ -271,7 +271,7 @@ MyTitle = ig.Game.extend({
 		
 		var startText = ig.ua.mobile
 			? 'Press Button to Play! Attention: You have to collect all of the money bags!'
-			: 'Press Y to Jump and X to shoot. Attention: You have to collect all of the money bags!';
+			: 'Press Y to Jump and X to shoot. Use the arrow keys to move.\n Attention: You have to collect all of the money bags!';
 		
 		this.font.draw( startText, cx, 420, ig.Font.ALIGN.CENTER);
 
