@@ -300,7 +300,9 @@ function init() {
 			element.parentNode.removeChild(element);
 			NewGame(oldFEN);
 			console.log("WON MINIGAME");
+			has2x = true;
 		}
+		CheckStatus();
 	}
 	
 	/* clemens end */

@@ -12,8 +12,8 @@
 	position: relative;
 	top: 20px;
 	left: 60px;
-	width: 484px;
-	height: 484px;
+	width: 480px;
+	height: 480px;
 	border-style: solid;
 	border-width: 2px;
 }
@@ -75,20 +75,122 @@
 }
 
 
+#springer {
+	position:fixed;
+	margin-left:600px;
+	top:20%;
+}
+
+.springer, .springer:focus, .springer:active {
+  -webkit-animation-name: springer-float, springer;
+  animation-name: springer-float, springer;
+  -webkit-animation-duration: .3s, 1.5s;
+  animation-duration: .3s, 1.5s;
+  -webkit-animation-delay: 0s, .3s;
+  animation-delay: 0s, .3s;
+  -webkit-animation-timing-function: ease-out, ease-in-out;
+  animation-timing-function: ease-out, ease-in-out;
+  -webkit-animation-iteration-count: 1, infinite;
+  animation-iteration-count: 1, infinite;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+  -webkit-animation-direction: normal, alternate;
+  animation-direction: normal, alternate;
+}
+
+@-webkit-keyframes springer {
+  0% {
+    -webkit-transform: translateY(-16px);
+    transform: translateY(-16px);
+  }
+
+  50% {
+    -webkit-transform: translateY(-8px);
+    transform: translateY(-8px);
+  }
+
+  100% {
+    -webkit-transform: translateY(-16px);
+    transform: translateY(-16px);
+  }
+}
+
+@keyframes springer {
+  0% {
+    -webkit-transform: translateY(-16px);
+    transform: translateY(-16px);
+  }
+
+  50% {
+    -webkit-transform: translateY(-8px);
+    transform: translateY(-8px);
+  }
+
+  100% {
+    -webkit-transform: translateY(-16px);
+    transform: translateY(-16px);
+  }
+}
+
+@-webkit-keyframes springer-float {
+  100% {
+    -webkit-transform: translateY(-16px);
+    transform: translateY(-16px);
+  }
+}
+
+@keyframes springer-float {
+  100% {
+    -webkit-transform: translateY(-16px);
+    transform: translateY(-16px);
+  }
+}
+
+#EngineOutput{
+	visibility: hidden;
+}
+
+body{
+	background: #333333;
+	color: white;
+}
+
+#FenInDiv{
+	visibility:hidden;
+}
+
+h1{
+	margin-left:218px;
+}
+
+footer{
+	padding-top:15px;
+	margin-left:70px;
+}
+
+a.speziell:link {
+   color:            white;
+}
+
+a.speziell:visited {
+   color:            white;
+}
+
+a.speziell:hover {
+   color:            white;
+}
+
+a.speziell:active {
+   color:            white;
+}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+#status{
+	position:absolute;
+	font-size:20px;
+	margin-top:-20px;
+	margin-left: 60px;
+}
 
 
 

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Impact Game</title>
+	<style type="text/css">
+		html,body {
+			background-color: #333;
+			color: #fff;
+			font-family: helvetica, arial, sans-serif;
+			margin: 0;
+			padding: 0;
+			font-size: 12pt;
+		}
+		
+		#canvas {
+			position: absolute;
+			left: 0;
+			right: 0;
+			top: 0;
+			bottom: 0;
+			margin: auto;
+		}
+		
+	</style>
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<script src="lib/jquery-1.10.1.min.js"></script>
+	<script src="lib/bootstrap.js"></script>
+	<script type="text/javascript" src="lib/impact/impact.js"></script>
+	<script type="text/javascript" src="lib/game/main.js"></script>
+</head>
+<body>
+	<canvas id="canvas"></canvas>
+		<!-- Outro Modal -->
+		<div id="ModalOutroJetpack" class="modal fade" role="dialog" style="margin-left: 100">
+		  <div class="table-responsive" style="width: 60%">
+		
+		    <!-- Modal content-->
+		    <div class="modal-content">
+		      <div class="modal-header" style="text-align: center">
+		      	<h4 class="modal-title">YOU WON!</h4>
+		      </div>
+		      <div class="modal-body" style="text-align: center">
+		      	You won a Jetpack! </br>
+		      	<img src="media/rocket.png"></img>
+		      	Your token can fly on any field!
+			  </div>
+		    </div>
+		  </div>
+		</div>
+		
+		<div id="ModalOutroMissile" class="modal fade" role="dialog">
+		  <div class="modal-dialog">
+		
+		    <!-- Modal content-->
+		    <div class="modal-content">
+		      <div class="modal-header" style="text-align: center">
+		      	<h4 class="modal-title">YOU WON!</h4>
+		      </div>
+		      <div class="modal-body" style="text-align: center">
+		        Take a missile!
+		      </div>
+		    </div>
+		  </div>
+		</div>
+		
+		<div id="ModalOutroLost" class="modal fade" role="dialog">
+		  <div class="modal-dialog">
+		
+		    <!-- Modal content-->
+		    <div class="modal-content">
+		      <div class="modal-header">
+		      	<h4 class="modal-title" style="text-align: center">YOU LOST</h4>
+		      </div>
+		      <div class="modal-body" style="text-align: center">
+		      	<b>Your token is dead!</b>
+		      </div>
+		      <div class="modal-body" style="text-align: center">
+		      	<img src="media/cross.png"></img>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+</body>
+</html>

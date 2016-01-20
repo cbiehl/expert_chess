@@ -8,15 +8,19 @@
 	</head>
 	<body>
 		<header>
-			<h3>JS Chess</h3>			
-		</header>	
+			<h1>Expert Chess</h1>			
+		</header>
 		<div id="FenInDiv">
 			Fen:<br/>
 			<input type="text" id="fenIn"/>		
 			<button type="button" id="SetFen">Set Position</button>			
-		</div>		
+		</div>	
+		
+		<span id="status">Test</span>
+		<div	
 		<div id="Board">
 		</div>
+		
 		<div id="EngineOutput">Thinking Time: <br/>
 			<select id="ThinkTimeChoice">
 			<option value="1">1s</option>
@@ -45,6 +49,8 @@
 			
 			<span id="GameStatus"></span>
 		</div>
+		
+		<img id="springer" class="springer" src="images/Springer.png"></img>
 		
 		<footer style="height: 100%">
 			<p>

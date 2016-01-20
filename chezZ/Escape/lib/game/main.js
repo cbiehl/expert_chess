@@ -4,13 +4,10 @@ ig.module(
 .requires(
 	'impact.game',
 	'impact.font',
-	'game.entities.rocket',
 	'game.levels.escapeLvl',
 	'game.entities.ball',
 	'game.entities.white',
-	'game.entities.street',
 	'game.entities.countdown',
-	'game.entities.won',
 	'game.entities.background'
 )
 .defines(function(){
@@ -214,7 +211,8 @@ MyGame = ig.Game.extend({
 		//clemens
 		//this.spawnOverlay();
 		
-		if(Math.random()>0.5){
+		var ranNum = Math.random();
+		if(ranNum<=0.4){
 
 			$('#ModalOutroJetpack').modal('show');
 			
@@ -224,12 +222,20 @@ MyGame = ig.Game.extend({
 				
 	       	}, 4000);
 			
-		}else{
+		}else if(ranNum<=0.8){
 			$('#ModalOutroMissile').modal('show');
 			
 			window.setTimeout(function(){ 
 				$('#ModalOutroMissile').modal('hide');
 				window.top.postMessage("DELETEIFRAMEWONMISSILE", '*');
+				
+	       	}, 4000);
+		}else{
+			$('#ModalOutro2X').modal('show');
+			
+			window.setTimeout(function(){ 
+				$('#ModalOutroJetpack').modal('hide');
+				window.top.postMessage("DELETEIFRAMEWON2X", '*');
 				
 	       	}, 4000);
 		}

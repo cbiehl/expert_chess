@@ -1,3 +1,17 @@
+function CheckStatus(){
+	if(lostMinigame)
+		$("#status").text('You lost your piece!');
+	
+	if(has2x)
+		$("#status").text('You won! You can move a second time!');
+	
+	if(hasMissile)
+		$("#status").text('You won a missile! Shoot one of your enemies pawns.');
+	
+	if(hasJetpack)
+		$("#status").text('You won a jetpack! You can fly to certain fields.');
+}
+
 function changeImage(sq, string){
 	//change the image
 	var pce = GameBoard.pieces[sq];
@@ -13,6 +27,7 @@ function changeImage(sq, string){
 
 function lostMinigame(sq){
 	NewGame(oldFEN);
+	lostMinigame = true;
 	changeImage(sq,"_death");
 	setTimeout(function(){
 	ClearPiece(sq);
@@ -24,6 +39,7 @@ function lostMinigame(sq){
 	MoveGUIPiece(parsed);
 	CheckAndSet();
 	PreSearch();
+	lostMinigame = false;
 	}, 1000 );
 }
 
@@ -252,18 +268,30 @@ function aiPlaysGame(to){
 	if(random<=0.8){
 		//won the game, use item
 		console.log("ai won the game");
-		if(Math.random()<=0.5)
+		if(Math.random()<=0.5){
+			$("#status").text('Computer won a missile!');
 			computerUsesMissile(to);
-		else
+			setTimeout(function(){
+				$("#status").text('Your turn! Move a piece!');
+			},1000);
+		}else{
+			$("#status").text('Computer won a jetpack!');
 			computerUsesJetpack(to);
+			setTimeout(function(){
+				$("#status").text('Your turn! Move a piece!');
+			},1000);
+		}
 	}else{
+		$("#status").text('Computer lost the game and his token!');
 		//lost the game, kill the piece
 		changeImage(to,"_death");
 		setTimeout(function(){
 		ClearPiece(to);
 		RemoveGUIPiece(to);
-		console.log("ai lost the game");
 		}, 1000 );
+		setTimeout(function(){
+			$("#status").text('Your turn! Move a piece!');
+		},1000);
 	}
 }
 

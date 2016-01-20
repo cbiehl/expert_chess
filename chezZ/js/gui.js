@@ -82,7 +82,7 @@ function SetSqSelected(sq) {
 function ClickedSquare(pageX, pageY) {
 	console.log('ClickedSquare() at ' + pageX + ',' + pageY);
 	var position = $('#Board').position();
-	
+
 	var workedX = Math.floor(position.left);
 	var workedY = Math.floor(position.top);
 	
@@ -105,6 +105,8 @@ function ClickedSquare(pageX, pageY) {
 }
 
 $(document).on('click','.Piece', function (e) {
+	if(AI_PLAYS_GAME)
+		return;
 	//gunter - umschließende if anweisung
 	if(!hasMissile && !hasJetpack){
 		console.log('Piece Click');
@@ -369,17 +371,17 @@ function ThreeFoldRep() {
 
 function CheckResult() {
 	if(GameBoard.fiftyMove >= 100) {
-		 $("#GameStatus").text("GAME DRAWN {fifty move rule}"); 
+		 $("#status").text("GAME DRAWN {fifty move rule}"); 
 		 return BOOL.TRUE;
 	}
 	
 	if (ThreeFoldRep() >= 2) {
-     	$("#GameStatus").text("GAME DRAWN {3-fold repetition}"); 
+     	$("#status").text("GAME DRAWN {3-fold repetition}"); 
      	return BOOL.TRUE;
     }
 	
 	if (DrawMaterial() == BOOL.TRUE) {
-     	$("#GameStatus").text("GAME DRAWN {insufficient material to mate}"); 
+     	$("#status").text("GAME DRAWN {insufficient material to mate}"); 
      	return BOOL.TRUE;
     }
     
@@ -404,14 +406,14 @@ function CheckResult() {
 	
 	if(InCheck == BOOL.TRUE) {
 		if(GameBoard.side == COLOURS.WHITE) {
-	      $("#GameStatus").text("GAME OVER {black mates}");
+	      $("#status").text("GAME OVER {black mates}");
 	      return BOOL.TRUE;
         } else {
-	      $("#GameStatus").text("GAME OVER {white mates}");
+	      $("#status").text("GAME OVER {white mates}");
 	      return BOOL.TRUE;
         }
 	} else {
-		$("#GameStatus").text("GAME DRAWN {stalemate}");return BOOL.TRUE;
+		$("#status").text("GAME DRAWN {stalemate}");return BOOL.TRUE;
 	}
 	
 	return BOOL.FALSE;	
@@ -420,9 +422,13 @@ function CheckResult() {
 function CheckAndSet() {
 	if(CheckResult() == BOOL.TRUE) {
 		GameController.GameOver = BOOL.TRUE;
-	} else {
+	} else{
 		GameController.GameOver = BOOL.FALSE;
-		$("#GameStatus").text('');
+		if(!AI_PLAYS_GAME)
+			$("#status").text('');
+		
+		if(!GameBoard.side && !AI_PLAYS_GAME)
+			$("#status").text('Your turn! Move a piece!');
 	}
 	//gunter
 	document.getElementById("fenIn").value = BoardToFen();
@@ -441,7 +447,7 @@ $('#SearchButton').click( function () {
 });
 
 function StartSearch() {
-
+	AI_PLAYS_GAME = true;
 	SearchController.depth = MAXDEPTH;
 	var t = $.now();
 	var tt = $('#ThinkTimeChoice').val();
@@ -462,12 +468,18 @@ function StartSearch() {
 	var isSpecialField = domSq.hasClass("specialField");
 	setTimeout(function(){
 	if(isSpecialField){
-		AI_PLAYS_GAME = true;
 		aiPlaysGame(to);
-		AI_PLAYS_GAME = false;
+		setTimeout(function(){
+			AI_PLAYS_GAME = false;
+			}, 1000)
+
 	}
 	CheckAndSet();
 	}, 1000);
+	
+	setTimeout(function(){
+			AI_PLAYS_GAME = false;
+		}, 2500)
 }
 
 
