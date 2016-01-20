@@ -159,7 +159,6 @@ MyGame = ig.Game.extend({
 			
 		}else{
 			var ranNum = Math.random();
-			debugger;
 			if(ranNum<=0.4){
 				
 				$('#ModalOutroJetpack').modal('show');

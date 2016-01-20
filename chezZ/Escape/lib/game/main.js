@@ -208,8 +208,9 @@ MyGame = ig.Game.extend({
 	youWon: function(){
 		console.log("You won");
 		this.stopGame();
+		
 		//clemens
-		//this.spawnOverlay();
+		var rand = Math.random();
 		
 		var ranNum = Math.random();
 		if(ranNum<=0.4){

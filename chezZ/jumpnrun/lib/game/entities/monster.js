@@ -52,7 +52,7 @@ EntityMonster = ig.Entity.extend({
 		
 		this.shoot += 1;
 		
-		if(this.shoot == 50 && ig.game.player.pos.x > 1300 ){
+		if(this.shoot == 70 && ig.game.player.pos.x > 1300 ){
 			var x = this.pos.x;
 			var y = this.pos.y;
 			
@@ -64,7 +64,7 @@ EntityMonster = ig.Entity.extend({
 		this.vel.x = this.speed * xdir;
 		this.currentAnim.flip.x = !this.flip;
 		
-		if(this.shoot >= 50){
+		if(this.shoot >= 70){
 			this.shoot = 0;
 		}
 		

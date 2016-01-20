@@ -26,7 +26,7 @@ EntityHurt = ig.Entity.extend({
 	_wmBoxColor: 'rgba(255, 0, 0, 0.7)',
 	
 	size: {x: 32, y: 32},
-	damage: 10,
+	damage: 1,
 		
 	triggeredBy: function( entity, trigger ) {	
 		entity.receiveDamage(this.damage, this);

@@ -35,8 +35,10 @@ MyGame = ig.Game.extend({
 		//clemens
 		//this.spawnOverlay();
 		
-		if(Math.random()>0.5){
-
+		var rand = Math.random();
+		
+		if(rand > 0.66){
+			
 			$('#ModalOutroJetpack').modal('show');
 			
 			window.setTimeout(function(){ 
@@ -45,7 +47,8 @@ MyGame = ig.Game.extend({
 				
 	       	}, 4000);
 			
-		}else{
+		}else if(0.33 < rand < 0.66){
+			
 			$('#ModalOutroMissile').modal('show');
 			
 			window.setTimeout(function(){ 
@@ -53,7 +56,16 @@ MyGame = ig.Game.extend({
 				window.top.postMessage("DELETEIFRAMEWONMISSILE", '*');
 				
 	       	}, 4000);
-		}
+			
+		}else{
+			
+			$('#ModalOutro2x').modal('show');
+			
+			window.setTimeout(function(){ 
+				$('#ModalOutro2x').modal('hide');
+				window.top.postMessage("DELETEIFRAMEWON2X", '*');
+				
+	       	}, 4000);
 		
 	},
 	
