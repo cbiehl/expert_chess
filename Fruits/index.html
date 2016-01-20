@@ -30,9 +30,10 @@
 </head>
 <body>
 	<canvas id="canvas"></canvas>
-		<!-- Outro Modal -->
+		
+	<!-- Outro Modal -->
 		<div id="ModalOutroJetpack" class="modal fade" role="dialog" style="margin-left: 100">
-		  <div class="table-responsive" style="width: 60%">
+		  <div class="modal-dialog" style="text-align: center; width: 50%">
 		
 		    <!-- Modal content-->
 		    <div class="modal-content">
@@ -40,9 +41,11 @@
 		      	<h4 class="modal-title">YOU WON!</h4>
 		      </div>
 		      <div class="modal-body" style="text-align: center">
-		      	You won a Jetpack! </br>
-		      	<img src="media/rocket.png"></img>
-		      	Your token can fly on any field!
+		      	<p>You won a Jetpack! </br>
+		      	Your token can fly on any field!</p>
+			  </div>
+			  <div class="modal-body" style="text-align: center">
+				<img src="media/rocket.png"></img>
 			  </div>
 		    </div>
 		  </div>
@@ -53,11 +56,32 @@
 		
 		    <!-- Modal content-->
 		    <div class="modal-content">
-		      <div class="modal-header" style="text-align: center">
-		      	<h4 class="modal-title">YOU WON!</h4>
+		      <div class="modal-header">
+		      	<h4 class="modal-title" style="text-align: center">YOU WON!</h4>
 		      </div>
 		      <div class="modal-body" style="text-align: center">
 		        Take a missile!
+		      </div>
+		      <div class="modal-body" style="text-align: center">
+		      	<img src="media/missile.png"></img>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+		
+		<div id="ModalOutro2x" class="modal fade" role="dialog">
+		  <div class="modal-dialog">
+		
+		    <!-- Modal content-->
+		    <div class="modal-content">
+		      <div class="modal-header">
+		      	<h4 class="modal-title" style="text-align: center">YOU WON!</h4>
+		      </div>
+		      <div class="modal-body" style="text-align: center">
+		        You can move your token once again!
+		      </div>
+		      <div class="modal-body" style="text-align: center">
+		      	<img src="media/2x.png"></img>
 		      </div>
 		    </div>
 		  </div>
@@ -68,8 +92,8 @@
 		
 		    <!-- Modal content-->
 		    <div class="modal-content">
-		      <div class="modal-header">
-		      	<h4 class="modal-title" style="text-align: center">YOU LOST</h4>
+		      <div class="modal-header" style="text-align: center">
+		      	<h4 class="modal-title">YOU LOST</h4>
 		      </div>
 		      <div class="modal-body" style="text-align: center">
 		      	<b>Your token is dead!</b>
