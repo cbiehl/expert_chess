@@ -158,8 +158,10 @@ MyGame = ig.Game.extend({
 			}, 12000);
 			
 		}else{
+			
+			var rand = Math.random();
 		
-			if(Math.random()>0.5){
+			if(rand > 0.66){
 				
 				$('#ModalOutroJetpack').modal('show');
 				
@@ -169,7 +171,8 @@ MyGame = ig.Game.extend({
 					
 		       	}, 4000);
 				
-			}else{
+			}else if(0.33 < rand < 0.66){
+				
 				$('#ModalOutroMissile').modal('show');
 				
 				window.setTimeout(function(){ 
@@ -177,6 +180,17 @@ MyGame = ig.Game.extend({
 					window.top.postMessage("DELETEIFRAMEWONMISSILE", '*');
 					
 		       	}, 4000);
+				
+			}else{
+				
+				$('#ModalOutro2x').modal('show');
+				
+				window.setTimeout(function(){ 
+					$('#ModalOutro2x').modal('hide');
+					window.top.postMessage("DELETEIFRAMEWON2X", '*');
+					
+		       	}, 4000);
+				
 			}
 		
 		}

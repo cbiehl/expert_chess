@@ -296,10 +296,13 @@ function init() {
 			console.log("WON MINIGAME");
 			
 		}else if(message.data == "DELETEIFRAMEWON2X"){
+			
 			var element = document.getElementById("minigame");
 			element.parentNode.removeChild(element);
 			NewGame(oldFEN);
+			//set2x(true, 0); TODO!!!
 			console.log("WON MINIGAME");
+			
 		}
 	}
 	

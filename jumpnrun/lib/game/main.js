@@ -11,11 +11,8 @@ ig.module(
 	'plugins.gamepad',
 	
 	'game.entities.player',
-	//'game.entities.blob',
 	'game.entities.monster',
-	'game.entities.won',
 
-	//'game.levels.title',
 	'game.levels.customlevel'
 )
 .defines(function(){
@@ -36,6 +33,7 @@ MyGame = ig.Game.extend({
 	heartFull: new ig.Image( 'media/heart-full.png' ),
 	heartEmpty: new ig.Image( 'media/heart-empty.png' ),
 	coinIcon: new ig.Image( 'media/coin.png' ),
+	start: true,
 	
 	
 	init: function() {
@@ -87,6 +85,19 @@ MyGame = ig.Game.extend({
 		// Update all entities and BackgroundMaps
 		this.parent();
 		
+//		if(this.start){ //modal for intro not necessary -> MyTitle
+//			ig.system.stopRunLoop();
+//			
+//			$('#ModalIntro').modal('show');
+//			
+//			setTimeout(function(){ 
+//				$('#ModalIntro').modal('hide');
+//				ig.system.startRunLoop();
+//			}, 5000);
+//			
+//			this.start = false;
+//		}
+		
 		// Camera follows the player
 		this.camera.follow( this.player );
 		
@@ -121,7 +132,7 @@ MyGame = ig.Game.extend({
 
 			// We only want to draw the 0th tile of coin sprite-sheet
 			x += 48;
-			this.coinIcon.drawTile( x, y+6, 0, 36 );
+			this.coinIcon.drawTile( x, y+6, 0, 40 );
 
 			x += 42;
 			this.font.draw( 'x ' + this.player.coins, x, y+10 )
@@ -133,22 +144,55 @@ MyGame = ig.Game.extend({
 		}
 	},
 	
-	youWon: function(){
+	youWon: function(arg){
 		console.log("You won");
 		this.stopGame();
-		this.spawnOverlay();
-       	window.setTimeout(function(){ window.top.postMessage("DELETEIFRAMEWON", '*'); }, 3000);
-	},
-	
-	spawnOverlay: function(){
-		ig.game.spawnEntity('EntityWon',800,600);
+		
+		if(arg == "europe"){
+			
+			$('#ModalOutroLostEurope').modal('show');
+			
+			window.setTimeout(function(){ 
+				$('#ModalOutroLostEurope').modal('hide');
+				window.top.postMessage("DELETEIFRAMELOST", '*'); 
+			}, 12000);
+			
+		}else{
+		
+			if(Math.random()>0.5){
+				
+				$('#ModalOutroJetpack').modal('show');
+				
+				window.setTimeout(function(){ 
+					$('#ModalOutroJetpack').modal('hide');
+					window.top.postMessage("DELETEIFRAMEWONJETPACK", '*');
+					
+		       	}, 4000);
+				
+			}else{
+				$('#ModalOutroMissile').modal('show');
+				
+				window.setTimeout(function(){ 
+					$('#ModalOutroMissile').modal('hide');
+					window.top.postMessage("DELETEIFRAMEWONMISSILE", '*');
+					
+		       	}, 4000);
+			}
+		
+		}
 	},
 	
 	youLost: function(){
 		console.log('You are dead');
 		console.log('You lost');
 		ig.game.stopGame();
-		window.setTimeout(function(){ window.top.postMessage("DELETEIFRAMELOST", '*'); }, 3000);
+		
+		$('#ModalOutroLost').modal('show');
+		
+		window.setTimeout(function(){ 
+			$('#ModalOutroLost').modal('hide');
+			window.top.postMessage("DELETEIFRAMELOST", '*'); 
+		}, 4000);
 	},
 	
 	stopGame: function(){
@@ -175,8 +219,8 @@ MyTitle = ig.Game.extend({
 		// Bind keys
 		ig.input.bind( ig.KEY.LEFT_ARROW, 'left' );
 		ig.input.bind( ig.KEY.RIGHT_ARROW, 'right' );
-		ig.input.bind( ig.KEY.X, 'jump' );
-		ig.input.bind( ig.KEY.C, 'shoot' );
+		ig.input.bind( ig.KEY.Y, 'jump' );
+		ig.input.bind( ig.KEY.X, 'shoot' );
 
 		ig.input.bind( ig.GAMEPAD.PAD_LEFT, 'left' );
 		ig.input.bind( ig.GAMEPAD.PAD_RIGHT, 'right' );
@@ -226,8 +270,8 @@ MyTitle = ig.Game.extend({
 		this.title.draw( cx - this.title.width/2, 60 );
 		
 		var startText = ig.ua.mobile
-			? 'Press Button to Play!'
-			: 'Press X or C to Play!';
+			? 'Press Button to Play! Attention: You have to collect all of the money bags!'
+			: 'Press Y to Jump and X to shoot. Use the arrow keys to move.\n Attention: You have to collect all of the money bags!';
 		
 		this.font.draw( startText, cx, 420, ig.Font.ALIGN.CENTER);
 
