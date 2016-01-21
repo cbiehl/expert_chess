@@ -228,8 +228,8 @@ MyTitle = ig.Game.extend({
 		// Bind keys
 		ig.input.bind( ig.KEY.LEFT_ARROW, 'left' );
 		ig.input.bind( ig.KEY.RIGHT_ARROW, 'right' );
-		ig.input.bind( ig.KEY.Y, 'jump' );
-		ig.input.bind( ig.KEY.X, 'shoot' );
+		ig.input.bind( ig.KEY.UP_ARROW, 'jump' );
+		ig.input.bind( ig.KEY.SPACE, 'shoot' );
 
 		ig.input.bind( ig.GAMEPAD.PAD_LEFT, 'left' );
 		ig.input.bind( ig.GAMEPAD.PAD_RIGHT, 'right' );
@@ -280,7 +280,7 @@ MyTitle = ig.Game.extend({
 		
 		var startText = ig.ua.mobile
 			? 'Press Button to Play! Attention: You have to collect all of the money bags!'
-			: 'Press Y to Jump and X to shoot. Use the arrow keys to move.\n Attention: You have to collect all of the money bags!';
+			: 'Press space to shoot. Use the arrow keys to move and jump.\n Attention: You have to collect all of the money bags!';
 		
 		this.font.draw( startText, cx, 420, ig.Font.ALIGN.CENTER);
 
