@@ -407,9 +407,26 @@ function CheckResult() {
 	if(InCheck == BOOL.TRUE) {
 		if(GameBoard.side == COLOURS.WHITE) {
 	      $("#status").text("GAME OVER {black mates}");
+	      
+	      var $newgame = $('<button type="button" id="newgame" class="btn btn-primary btn-lg" style="width: 30%; height: 40px; margin-top: 40px; margin-left: 70px">New Game</button>');
+	      $newgame.insertBefore('footer');
+	      
+	      $('#newgame').on('click',function(){
+	          window.location.href = "http://expertchess.kevin-schneider-kaub.de/game";
+	      });
+	      
 	      return BOOL.TRUE;
+	      
         } else {
 	      $("#status").text("GAME OVER {white mates}");
+	      
+	      var $newgame = $('<button type="button" id="newgame" class="btn btn-primary btn-lg" style="width: 30%; height: 40px; margin-top: 40px; margin-left: 70px">New Game</button>');
+	      $newgame.insertBefore('footer');
+	      
+	      $('#newgame').on('click',function(){
+	    	  window.location.href = "http://expertchess.kevin-schneider-kaub.de/game";
+	      });
+	      
 	      return BOOL.TRUE;
         }
 	} else {
