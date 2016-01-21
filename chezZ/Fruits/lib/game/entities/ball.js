@@ -9,10 +9,11 @@ ig.module(
 EntityBall = ig.Entity.extend({
 	
 	size: {x:24, y:24},
-	collides: ig.Entity.COLLIDES.ACTIVE,
-	type: ig.Entity.TYPE.A,
+	collides: ig.Entity.COLLIDES.NEVER,
+	type: ig.Entity.TYPE.B,
 	checkAgainst: ig.Entity.TYPE.A,
 	collision:false,
+	shootsound: new ig.Sound( 'media/shoot.*' ),
 
 	
 	animSheet: new ig.AnimationSheet( 'media/car.png', 24, 24 ),
@@ -48,8 +49,15 @@ EntityBall = ig.Entity.extend({
 			this.collision=false;
 			
 		}
+		 if (ig.input.pressed('leftButton')) {
+		        ig.log('clicked');
+		        this.shootsound.play();
+		   
+		    }
+		
 		 if (ig.input.pressed('leftButton') && this.inFocus()) {
 		        ig.log('clicked');
+		        
 		        this.kill();
 		    }
 		

@@ -11,6 +11,8 @@ EntityCountdown = ig.Entity.extend({
     size: {x:16, y:16},
     collides: ig.Entity.COLLIDES.NONE,
     stop:false,
+    bool:true,
+    
     
     animSheet: new ig.AnimationSheet( 'media/countdown3.png', 16, 16 ),
     
@@ -27,7 +29,7 @@ EntityCountdown = ig.Entity.extend({
         this.addAnim( '2', 1, [2] );
         this.addAnim( '1', 1, [1] );
         this.addAnim( '0', 1, [0] );
-        this.countdown = new ig.Timer(10);
+        this.countdown = new ig.Timer(15);
         ig.game.cntDown = this.countdown;
     },
     
@@ -38,6 +40,10 @@ EntityCountdown = ig.Entity.extend({
 	      	this.currentAnim = this.anims[0];
 	       	this.stop = true;
 	       	ig.game.youWon();
+	    }
+	    if (Math.ceil(Math.abs(this.countdown.delta())) < 10 && this.bool ==true ){
+	    	ig.game.sound.play();
+	    	this.bool = false;
 	    }
 	        	
     	if(this.countdown.delta()>-2)
