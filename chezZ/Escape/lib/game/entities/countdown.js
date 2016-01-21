@@ -27,7 +27,7 @@ EntityCountdown = ig.Entity.extend({
         this.addAnim( '2', 1, [2] );
         this.addAnim( '1', 1, [1] );
         this.addAnim( '0', 1, [0] );
-        this.countdown = new ig.Timer(10);
+        this.countdown = new ig.Timer(15);
         ig.game.cntDown = this.countdown;
     },
     

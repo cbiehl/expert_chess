@@ -1,5 +1,5 @@
 function CheckStatus(){
-	if(lostMinigame)
+	if(varlostMinigame)
 		$("#status").text('You lost your piece!');
 	
 	if(has2x)
@@ -10,6 +10,9 @@ function CheckStatus(){
 	
 	if(hasJetpack)
 		$("#status").text('You won a jetpack! You can fly to certain fields.');
+
+	if(GameController.GameOver)
+		$("#status").text("GAME OVER {black mates}");
 }
 
 function changeImage(sq, string){
@@ -27,20 +30,31 @@ function changeImage(sq, string){
 
 function lostMinigame(sq){
 	NewGame(oldFEN);
-	lostMinigame = true;
+	varlostMinigame = true;
 	changeImage(sq,"_death");
-	setTimeout(function(){
-	ClearPiece(sq);
-	RemoveGUIPiece(sq);
 	
-	var parsed = ParseMove(36,36);
-	MakeMove(parsed);
-	PrintBoard();
-	MoveGUIPiece(parsed);
-	CheckAndSet();
-	PreSearch();
-	lostMinigame = false;
-	}, 1000 );
+	if(GameBoard.pieces[sq] == PIECES.wK){
+		GameController.GameOver = BOOL.TRUE;
+		$("#status").text("GAME OVER {black mates}");
+		$(".markedField").removeClass("markedField");
+		DeSelectSq(oldSqMinigame);
+		
+	}
+	
+	setTimeout(function(){
+		ClearPiece(sq);
+		RemoveGUIPiece(sq);
+		
+		if(!GameController.GameOver){
+		var parsed = ParseMove(36,36);
+		MakeMove(parsed);
+		PrintBoard();
+		MoveGUIPiece(parsed);
+		CheckAndSet();
+		PreSearch();
+		varlostMinigame = false;
+		}
+		}, 1000 );
 }
 
 //function wonMinigame(sq){ // --> umgezogen in die main.js
@@ -55,6 +69,7 @@ function lostMinigame(sq){
 //jetpack functions
 function setJetpack(bool){
 	if(bool){
+		debugger;
 		changeImage(oldSqMinigame, "_jet");
 		markAllJetpackSquares();
 		hasJetpack = true;

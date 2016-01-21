@@ -105,6 +105,62 @@ function ClickedSquare(pageX, pageY) {
 }
 
 $(document).on('click','.Piece', function (e) {
+	if(GameController.GameOver)
+		return;
+	if(AI_PLAYS_GAME)
+		return;
+	//gunter - umschließende if anweisung
+	if(!hasMissile && !hasJetpack){
+		console.log('Piece Click');
+		var pieceRank = this.classList[1][4] - 1;
+		var pieceFile = this.classList[2][4] - 1;
+		var pieceSq = FR2SQ(pieceFile,pieceRank);
+		var flagSameSq = false;
+		if(pieceSq == UserMove.from){
+			flagSameSq = true;
+		}
+		if(GameBoard.pieces[pieceSq] <= 6 && !flagSameSq){
+			DeSelectSq(UserMove.from);
+			UserMove.from = SQUARES.NO_SQ;
+		}
+		if(UserMove.from == SQUARES.NO_SQ && !flagSameSq) {
+			UserMove.from = ClickedSquare(e.pageX, e.pageY);
+			/*gunter start*/
+			$(".markedField").removeClass("markedField");
+			for(index = GameBoard.moveListStart[GameBoard.ply]; index < GameBoard.moveListStart[GameBoard.ply + 1]; ++index) {
+				var moveList_from = FROMSQ(GameBoard.moveList[index]);
+				if(moveList_from == UserMove.from){
+					moveList_to = TOSQ(GameBoard.moveList[index]);
+					
+					var rank = RanksBrd[moveList_to] + 1;
+					var file = FilesBrd[moveList_to] + 1;
+					frStr = ".Square"+".rank"+rank + ".file"+file;
+					$(frStr).addClass("markedField");
+					var parsed = ParseMove(moveList_from,moveList_to);
+					if(parsed == NOMOVE)
+						$(frStr).removeClass("markedField");
+				}
+			}
+			/*gunter end*/
+		} else {
+			$(".markedField").removeClass("markedField");
+			UserMove.to = ClickedSquare(e.pageX, e.pageY);
+		}
+		
+		MakeUserMove();
+	} else if(hasMissile && !hasJetpack){
+		var to = ClickedSquare(e.pageX, e.pageY);
+		if(GameBoard.pieces[to] == PIECES.bP){
+			//Kill the pawn on square to
+			playerUsesMissile(to);
+		}
+			
+	}
+	});
+
+
+$(document).on('touchstart','.Piece', function (e) {
+	debugger;
 	if(AI_PLAYS_GAME)
 		return;
 	//gunter - umschließende if anweisung
@@ -302,7 +358,6 @@ function AddGUIPiece(sq, pce) {
 }
 
 function MoveGUIPiece(move) {
-	
 	var from = FROMSQ(move);
 	var to = TOSQ(move);	
 	
@@ -403,8 +458,8 @@ function CheckResult() {
 	if(found != 0) return BOOL.FALSE;
 	
 	var InCheck = SqAttacked(GameBoard.pList[PCEINDEX(Kings[GameBoard.side],0)], GameBoard.side^1);
-	
-	if(InCheck == BOOL.TRUE) {
+	debugger;
+	if(InCheck == BOOL.TRUE  ||GameController.GameOver) {
 		if(GameBoard.side == COLOURS.WHITE) {
 	      $("#status").text("GAME OVER {black mates}");
 	      return BOOL.TRUE;
@@ -420,13 +475,14 @@ function CheckResult() {
 }
 
 function CheckAndSet() {
+
 	if(CheckResult() == BOOL.TRUE) {
 		GameController.GameOver = BOOL.TRUE;
 	} else{
 		GameController.GameOver = BOOL.FALSE;
 		if(!AI_PLAYS_GAME)
 			$("#status").text('');
-		
+
 		if(!GameBoard.side && !AI_PLAYS_GAME)
 			$("#status").text('Your turn! Move a piece!');
 	}
@@ -476,6 +532,9 @@ function StartSearch() {
 	}
 	CheckAndSet();
 	}, 1000);
+	
+	if(!isSpecialField)
+		AI_PLAYS_GAME = false;
 	
 	setTimeout(function(){
 			AI_PLAYS_GAME = false;

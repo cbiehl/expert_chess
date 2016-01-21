@@ -271,7 +271,6 @@ function init() {
 	
 	/* minigame integration */
 	window.onmessage = function(message){
-		debugger;
 		if(message.data == "DELETEIFRAMELOST"){
 			
 			var element = document.getElementById("minigame");

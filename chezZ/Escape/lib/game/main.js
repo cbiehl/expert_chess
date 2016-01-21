@@ -203,6 +203,10 @@ MyGame = ig.Game.extend({
 //		x = 10;
 //		y=0;
 //		this.font.draw( 'x ' + this.rocket.score, x, y+10 )
+		
+		if( window.myTouchButtons ) {
+			window.myTouchButtons.draw(); 
+		}
 	},
 	
 	youWon: function(){
@@ -273,3 +277,17 @@ MyGame = ig.Game.extend({
 ig.main( '#canvas', MyTitle, 60, 1080, 800, 1 );
 
 });
+
+
+if( ig.ua.mobile ) {
+	// Use the TouchButton Plugin to create a TouchButtonCollection that we
+	// can draw in our game classes.
+	
+	// Touch buttons are anchored to either the left or right and top or bottom
+	// screen edge.
+	var buttonImage = new ig.Image( 'media/touch-buttons.png' );
+	myTouchButtons = new ig.TouchButtonCollection([
+		new ig.TouchButton( 'left', {left: 0, bottom: 0}, 128, 128, buttonImage, 0 ),
+		new ig.TouchButton( 'right', {left: 128, bottom: 0}, 128, 128, buttonImage, 1 ),
+	]);
+}

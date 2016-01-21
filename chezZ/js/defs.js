@@ -4,7 +4,7 @@ var NR_OF_SF = 4;
 
 //gunter
 //hasPawn, lostMinigame, wonMinigame, hasMissile
-var lostMinigame;
+var varlostMinigame;
 var wonMinigame;
 var hasPawn;
 var hasMissile = false;
