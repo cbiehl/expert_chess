@@ -66,12 +66,12 @@ EntityTrigger = ig.Entity.extend({
 				}
 			}
 			
-			if( this.wait == -1 ) {
-				this.canFire = false;
-			}
-			else {
+//			if( this.wait == -1 ) {
+//				this.canFire = false;
+//			}
+//			else {
 				this.waitTimer.set( this.wait );
-			}
+//			}
 		}
 	},
 	

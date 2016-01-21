@@ -1,17 +1,21 @@
 ig.module( 'game.levels.customlevel' )
-.requires( 'impact.image','game.entities.coin','game.entities.trigger','game.entities.hurt','game.entities.player','game.entities.levelchange','game.entities.monster' )
+.requires( 'impact.image','game.entities.coin','game.entities.hurt','game.entities.trigger','game.entities.player','game.entities.levelchange','game.entities.monster' )
 .defines(function(){
 LevelCustomlevel=/*JSON[*/{
 	"entities": [
 		{
 			"type": "EntityCoin",
-			"x": 2256,
+			"x": 2400,
 			"y": 328
 		},
 		{
-			"type": "EntityCoin",
-			"x": 996,
-			"y": 724
+			"type": "EntityHurt",
+			"x": 2396,
+			"y": 1268,
+			"settings": {
+				"name": "hurt100",
+				"damage": 1
+			}
 		},
 		{
 			"type": "EntityCoin",
@@ -29,33 +33,14 @@ LevelCustomlevel=/*JSON[*/{
 			"y": 308
 		},
 		{
-			"type": "EntityTrigger",
-			"x": 980,
-			"y": 932,
-			"settings": {
-				"size": {
-					"x": 216,
-					"y": 48
-				},
-				"target": {
-					"1": "hurt100"
-				},
-				"wait": 0
-			}
+			"type": "EntityCoin",
+			"x": 2044,
+			"y": 536
 		},
 		{
-			"type": "EntityHurt",
-			"x": 2396,
-			"y": 1268,
-			"settings": {
-				"name": "hurt100",
-				"damage": 1
-			}
-		},
-		{
-			"type": "EntityPlayer",
-			"x": 89,
-			"y": 822
+			"type": "EntityCoin",
+			"x": 996,
+			"y": 724
 		},
 		{
 			"type": "EntityTrigger",
@@ -73,14 +58,29 @@ LevelCustomlevel=/*JSON[*/{
 			}
 		},
 		{
-			"type": "EntityCoin",
-			"x": 2044,
-			"y": 536
+			"type": "EntityTrigger",
+			"x": 980,
+			"y": 932,
+			"settings": {
+				"size": {
+					"x": 216,
+					"y": 48
+				},
+				"target": {
+					"1": "hurt100"
+				},
+				"wait": 0
+			}
 		},
 		{
 			"type": "EntityCoin",
-			"x": 2400,
+			"x": 2256,
 			"y": 328
+		},
+		{
+			"type": "EntityPlayer",
+			"x": 89,
+			"y": 822
 		},
 		{
 			"type": "EntityCoin",
@@ -161,6 +161,9 @@ LevelCustomlevel=/*JSON[*/{
 				"size": {
 					"x": 64,
 					"y": 32
+				},
+				"target": {
+					"1": "hurt100"
 				}
 			}
 		}
