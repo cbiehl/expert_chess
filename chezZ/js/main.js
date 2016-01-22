@@ -303,6 +303,7 @@ function init() {
 			console.log("WON MINIGAME");
 			has2x = true;
 		}
+		loading = false;
 		CheckStatus();
 	}
 	

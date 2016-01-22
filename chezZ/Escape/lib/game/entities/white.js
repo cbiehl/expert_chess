@@ -8,11 +8,11 @@ ig.module(
 
 EntityWhite = ig.Entity.extend({
 	
-	size: {x:40, y:40},
+	size: {x:40, y:200},
 	collides: ig.Entity.COLLIDES.NEVER,
 	checkAgainst: ig.Entity.TYPE.NONE,
 	type: ig.Entity.TYPE.NONE,
-	animSheet: new ig.AnimationSheet( 'media/white.png', 40, 40 ),
+	animSheet: new ig.AnimationSheet( 'media/white_new.png', 40, 200 ),
 	
 	init: function( x, y, settings ) {
 		this.parent( x, y, settings );

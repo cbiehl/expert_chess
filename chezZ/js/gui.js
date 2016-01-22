@@ -308,6 +308,7 @@ function MakeUserMove() {
 				iframe.style.overflow = "hidden";
 				iframe.style.zIndex = "999999";
 				
+				loading = true;
 				setTimeout(function(){
 					document.body.appendChild(iframe);
 					iframe.contentWindow.focus();
@@ -358,6 +359,8 @@ function AddGUIPiece(sq, pce) {
 }
 
 function MoveGUIPiece(move) {
+	if(loading)
+		return;
 	var from = FROMSQ(move);
 	var to = TOSQ(move);	
 	

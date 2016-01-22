@@ -4,6 +4,11 @@ ig.module(
 .requires(
 	'impact.game',
 	'impact.font',
+	
+	'plugins.touch-button',
+	'plugins.gamepad',
+	'plugins.impact-splash-loader',
+	
 	'game.levels.escapeLvl',
 	'game.entities.ball',
 	'game.entities.white',
@@ -29,9 +34,15 @@ ig.module(
 			ig.input.bind( ig.KEY.UP_ARROW, 'up' );
 			ig.input.bind( ig.KEY.DOWN_ARROW, 'down' );
 
+			ig.input.bind( ig.GAMEPAD.PAD_LEFT, 'left' );
+			ig.input.bind( ig.GAMEPAD.PAD_RIGHT, 'right' );
 			// We want the font's chars to slightly touch each other,
 			// so set the letter spacing to -2px.
 			this.font.letterSpacing = -2;
+			
+			if( window.myTouchButtons ) {
+				window.myTouchButtons.align(); 
+			}
 
 		},
 
@@ -55,6 +66,10 @@ ig.module(
 			
 			this.font.draw( startText, cx, 420, ig.Font.ALIGN.CENTER);
 
+			if( window.myTouchButtons ) {
+				window.myTouchButtons.draw(); 
+			}
+			
 		}
 		
 	});	
@@ -73,54 +88,51 @@ MyGame = ig.Game.extend({
 	speed: 300,
 //	backgroundImage:new ig.Image('media/black_2.png'),
 //	background,
+	sBG: new ig.Sound( 'media/sounds/background.*' ),
+	sWin: new ig.Sound( 'media/sounds/youwin.*' ),
 	
 	init: function() {
-		var data = [
-		            [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-		            [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-		            [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-		            [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-		            [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-		            [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-		            [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-		            [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-		            [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-		            [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-		            [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-		            [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-		            [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-		            [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-		            [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-		            [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-		            [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-		            [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-		            [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-		            [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-		        ];
-//		this.background = new ig.BackgroundMap(32,data,'media/black_2.png'),
 		
 		// Initialize your game here; bind keys etc.
-//		this.background.setScreenPos(0,0);
-//		ig.game.bg = this.background;
 		ig.input.bind(ig.KEY.LEFT_ARROW, 'left');
 		ig.input.bind(ig.KEY.RIGHT_ARROW, 'right');
+		
+		ig.input.bind( ig.GAMEPAD.PAD_LEFT, 'left' );
+		ig.input.bind( ig.GAMEPAD.PAD_RIGHT, 'right' );
+		
 		this.loadLevel(LevelEscapeLvl);
 
 		ig.game.spawnEntity('EntityBackground',0,0);
 		
 		ig.game.spawnEntity('EntityCountdown',20,20);
+
 		for(var k =0; k<=900; k+=300){
-			for (var i = 0; i<=200; i+=40){
-				var newStripe = ig.game.spawnEntity('EntityWhite', 360,-100+k+i);
-				newStripe.zIndex = -10;
-				newStripe.vel.y=this.speed;
-				
-				var newStripe = ig.game.spawnEntity('EntityWhite', 720,-100+k+i);
-				newStripe.zIndex = -10;
-				newStripe.vel.y=this.speed;
-			}
+			
+			var newStripe = ig.game.spawnEntity('EntityWhite', 360,-100+k);
+			newStripe.zIndex = -10;
+			newStripe.vel.y=this.speed;
+			
+			var newStripe = ig.game.spawnEntity('EntityWhite', 720,-100+k);
+			newStripe.zIndex = -10;
+			newStripe.vel.y=this.speed;
+			
+//			for (var i = 0; i<=200; i+=40){
+//				var newStripe = ig.game.spawnEntity('EntityWhite', 360,-100+k+i);
+//				newStripe.zIndex = -10;
+//				newStripe.vel.y=this.speed;
+//				
+//				var newStripe = ig.game.spawnEntity('EntityWhite', 720,-100+k+i);
+//				newStripe.zIndex = -10;
+//				newStripe.vel.y=this.speed;
+//			}
 		}
 		
+		ig.game.bgSound = this.sBG;
+		ig.game.bgSound.play();
+		
+		if( window.myTouchButtons ) {
+			window.myTouchButtons.align(); 
+		}
 	},
 	
 	update: function() {
@@ -168,25 +180,26 @@ MyGame = ig.Game.extend({
 		this.time2Stripes = this.time2Stripes-1;
 		if(this.time2Stripes<0){
 			this.time2Stripes = 60;
-			for (var i = 0; i<=200; i+=40){
-				var newStripe = ig.game.spawnEntity('EntityWhite', 360,-400+i);
-				newStripe.zIndex = -10;
-				newStripe.vel.y=this.speed;
-				
-				var newStripe = ig.game.spawnEntity('EntityWhite', 720,-400+i);
-				newStripe.zIndex = -10;
-				newStripe.vel.y=this.speed;
-				
-			}
+			var newStripe = ig.game.spawnEntity('EntityWhite', 360,-400);
+			newStripe.zIndex = -10;
+			newStripe.vel.y=this.speed;	
+			
+			var newStripe = ig.game.spawnEntity('EntityWhite', 720,-400);
+			newStripe.zIndex = -10;
+			newStripe.vel.y=this.speed;
+			
+//			for (var i = 0; i<=200; i+=40){
+//				var newStripe = ig.game.spawnEntity('EntityWhite', 360,-400+i);
+//				newStripe.zIndex = -10;
+//				newStripe.vel.y=this.speed;
+//				
+//				var newStripe = ig.game.spawnEntity('EntityWhite', 720,-400+i);
+//				newStripe.zIndex = -10;
+//				newStripe.vel.y=this.speed;
+//				
+//			}
 		}
 		
-//		this.time2street = this.time2street-1;
-//		if(this.time2street<0){
-//			this.time2street = 100;
-//			var newStreet = ig.game.spawnEntity('EntityStreet', 0,0);
-//			newStreet.zIndex = -20;
-//			newStreet.vel.y=70;
-//		}
 		ig.game.sortEntitiesDeferred();
 	},
 	
@@ -210,6 +223,8 @@ MyGame = ig.Game.extend({
 	},
 	
 	youWon: function(){
+		ig.game.bgSound.stop();
+		this.sWin.play();
 		console.log("You won");
 		this.stopGame();
 		
@@ -276,9 +291,6 @@ MyGame = ig.Game.extend({
 // up by a factor of 2
 ig.main( '#canvas', MyTitle, 60, 1080, 800, 1 );
 
-});
-
-
 if( ig.ua.mobile ) {
 	// Use the TouchButton Plugin to create a TouchButtonCollection that we
 	// can draw in our game classes.
@@ -287,7 +299,10 @@ if( ig.ua.mobile ) {
 	// screen edge.
 	var buttonImage = new ig.Image( 'media/touch-buttons.png' );
 	myTouchButtons = new ig.TouchButtonCollection([
-		new ig.TouchButton( 'left', {left: 0, bottom: 0}, 128, 128, buttonImage, 0 ),
-		new ig.TouchButton( 'right', {left: 128, bottom: 0}, 128, 128, buttonImage, 1 ),
+		new ig.TouchButton( 'left', {left: 330, bottom: 0}, 128, 128, buttonImage, 0 ),
+		new ig.TouchButton( 'right', {left: 620, bottom: 0}, 128, 128, buttonImage, 1 ),
 	]);
 }
+
+});
+

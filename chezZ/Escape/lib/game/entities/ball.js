@@ -15,6 +15,7 @@ EntityBall = ig.Entity.extend({
 	collision:false,
 	
 	animSheet: new ig.AnimationSheet( 'media/hit_comp_new.png', 121, 160 ),
+	sCrash: new ig.Sound( 'media/sounds/crash.*' ),
 	
 	init: function( x, y, settings ) {
 		this.parent( x, y, settings );
@@ -48,6 +49,8 @@ EntityBall = ig.Entity.extend({
 	
 	check: function(other){
 		if(this.pos.y<722){
+			ig.game.bgSound.stop();
+			this.sCrash.play();
 			other.setLiveStatus(false);
 			other.kill();
 			this.kill();
