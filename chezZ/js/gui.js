@@ -212,6 +212,32 @@ $(document).on('touchstart','.Piece', function (e) {
 	}
 	});
 
+$(document).on('touchstart','.Square', function (e) {
+	//gunter - umschließende if anweisung
+	if(!hasMissile && !hasJetpack){
+		$(".markedField").removeClass("markedField");
+		console.log('Square Click');	
+		if(UserMove.from != SQUARES.NO_SQ) {
+			UserMove.to = ClickedSquare(e.pageX, e.pageY);
+			MakeUserMove();
+		}
+	}
+	/*gunter start*/
+	//use jetpack
+	if(hasJetpack){
+//		if(UserMove.from != SQUARES.NO_SQ) {
+			UserMove.to = ClickedSquare(e.pageX, e.pageY);
+			var rank = RanksBrd[UserMove.to] + 1;
+			var file = FilesBrd[UserMove.to] + 1;
+			frStr = ".Square"+".rank"+rank + ".file"+file;
+			if($(frStr).hasClass("markedField"))
+				useJetpack(oldSqMinigame,UserMove.to);
+//		}		
+	}
+	/*gunter end*/
+
+});
+
 $(document).on('click','.Square', function (e) {
 	//gunter - umschließende if anweisung
 	if(!hasMissile && !hasJetpack){

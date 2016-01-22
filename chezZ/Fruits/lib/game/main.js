@@ -13,14 +13,14 @@ ig.module(
 .defines(function(){
 	
 	MyTitle = ig.Game.extend({
-		clearColor: "#d0f4f7",
+		clearColor: "#1A1431",
 		gravity: 400,
 
 		// The title image
 //		title: new ig.Image( 'media/title.png' ),
 //		background: new ig.Image('media/background.png'),
 		// Load a font
-		font: new ig.Font( 'media/04b03.font.png' ),
+		font: new ig.Font( 'media/04b03.font.png'),
 
 		init: function() {
 			// Bind keys
@@ -57,7 +57,6 @@ ig.module(
 			
 			this.font.draw( startText, 120, 80, ig.Font.ALIGN.CENTER);
 			this.font.draw( howtoplayText, 120, 60, ig.Font.ALIGN.CENTER);
-
 		}
 		
 	});	
@@ -93,7 +92,8 @@ MyGame = ig.Game.extend({
 		//clemens
 		//this.spawnOverlay();
 		
-		if(Math.random()>0.5){
+		var ranNum = Math.random();
+		if(ranNum<=0.4){
 
 			$('#ModalOutroJetpack').modal('show');
 			
@@ -103,12 +103,20 @@ MyGame = ig.Game.extend({
 				
 	       	}, 4000);
 			
-		}else{
+		}else if(ranNum<=0.8){
 			$('#ModalOutroMissile').modal('show');
 			
 			window.setTimeout(function(){ 
 				$('#ModalOutroMissile').modal('hide');
 				window.top.postMessage("DELETEIFRAMEWONMISSILE", '*');
+				
+	       	}, 4000);
+		}else{
+			$('#ModalOutro2x').modal('show');
+			
+			window.setTimeout(function(){ 
+				$('#ModalOutro2x').modal('hide');
+				window.top.postMessage("DELETEIFRAMEWON2X", '*');
 				
 	       	}, 4000);
 		}

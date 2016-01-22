@@ -178,10 +178,10 @@ MyGame = ig.Game.extend({
 					
 		       	}, 4000);
 			}else{
-				$('#ModalOutro2X').modal('show');
+				$('#ModalOutro2x').modal('show');
 					
 				window.setTimeout(function(){ 
-					$('#ModalOutroJetpack').modal('hide');
+					$('#ModalOutro2x').modal('hide');
 					window.top.postMessage("DELETEIFRAMEWON2X", '*');
 					
 		       	}, 4000);

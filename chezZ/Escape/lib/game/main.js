@@ -154,7 +154,7 @@ MyGame = ig.Game.extend({
 		
 		this.time2spawn = this.time2spawn-1;
 		if(this.time2spawn<0 && this.rocket.isAlive && this.spawn){
-			this.time2spawn = 45;
+			this.time2spawn = 48;
 			var xPosition = Math.random()*900+8;
 			var newObstacle = ig.game.spawnEntity('EntityBall', xPosition,-20);
 			newObstacle.zIndex = 0;
@@ -251,10 +251,10 @@ MyGame = ig.Game.extend({
 				
 	       	}, 4000);
 		}else{
-			$('#ModalOutro2X').modal('show');
+			$('#ModalOutro2x').modal('show');
 			
 			window.setTimeout(function(){ 
-				$('#ModalOutroJetpack').modal('hide');
+				$('#ModalOutro2x').modal('hide');
 				window.top.postMessage("DELETEIFRAMEWON2X", '*');
 				
 	       	}, 4000);
