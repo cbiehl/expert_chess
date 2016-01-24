@@ -312,12 +312,14 @@ function MakeUserMove() {
 			/*clemens start*/
 				var iframe = document.createElement("iframe");
 				var random_game = Math.random();
-				if(random_game <= 0.5){
+				if(random_game <= 0.33){
 					//Escape minigame
 					iframe.src = "Escape/index.html";
-				}else{
+				}else if(random_game <= 0.66){
 					//Defeat the Monster - jumpnrun minigame
 					iframe.src = "jumpnrun/index.html";
+				}else{
+					iframe.src = "Fruits/index.html";
 				}
 				
 				iframe.id = "minigame";
