@@ -286,10 +286,9 @@ MyGame = ig.Game.extend({
 	}
 });
 
-
 // Start the Game with 60fps, a resolution of 320x240, scaled
 // up by a factor of 2
-ig.main( '#canvas', MyTitle, 60, 1080, 800, 1 );
+	ig.main( '#canvas', MyTitle, 60, 1080, 800, 1 );
 
 if( ig.ua.mobile ) {
 	// Use the TouchButton Plugin to create a TouchButtonCollection that we
