@@ -105,6 +105,7 @@ function ClickedSquare(pageX, pageY) {
 }
 
 $(document).on('click','.Piece', function (e) {
+	e.stopPropagation(); e.preventDefault();
 	if(GameController.GameOver)
 		return;
 	if(AI_PLAYS_GAME)
@@ -160,7 +161,7 @@ $(document).on('click','.Piece', function (e) {
 
 
 $(document).on('touchstart','.Piece', function (e) {
-	debugger;
+	e.stopPropagation(); e.preventDefault();
 	if(AI_PLAYS_GAME)
 		return;
 	//gunter - umschließende if anweisung
@@ -178,7 +179,7 @@ $(document).on('touchstart','.Piece', function (e) {
 			UserMove.from = SQUARES.NO_SQ;
 		}
 		if(UserMove.from == SQUARES.NO_SQ && !flagSameSq) {
-			UserMove.from = ClickedSquare(e.pageX, e.pageY);
+			UserMove.from = ClickedSquare(e.originalEvent.touches[0].pageX, e.originalEvent.touches[0].pageY);
 			/*gunter start*/
 			$(".markedField").removeClass("markedField");
 			for(index = GameBoard.moveListStart[GameBoard.ply]; index < GameBoard.moveListStart[GameBoard.ply + 1]; ++index) {
@@ -198,12 +199,12 @@ $(document).on('touchstart','.Piece', function (e) {
 			/*gunter end*/
 		} else {
 			$(".markedField").removeClass("markedField");
-			UserMove.to = ClickedSquare(e.pageX, e.pageY);
+			UserMove.to = ClickedSquare(e.originalEvent.touches[0].pageX, e.originalEvent.touches[0].pageY);
 		}
 		
 		MakeUserMove();
 	} else if(hasMissile && !hasJetpack){
-		var to = ClickedSquare(e.pageX, e.pageY);
+		var to = ClickedSquare(e.originalEvent.touches[0].pageX, e.originalEvent.touches[0].pageY);
 		if(GameBoard.pieces[to] == PIECES.bP){
 			//Kill the pawn on square to
 			playerUsesMissile(to);
@@ -213,12 +214,13 @@ $(document).on('touchstart','.Piece', function (e) {
 	});
 
 $(document).on('touchstart','.Square', function (e) {
+	e.stopPropagation(); e.preventDefault();
 	//gunter - umschließende if anweisung
 	if(!hasMissile && !hasJetpack){
 		$(".markedField").removeClass("markedField");
 		console.log('Square Click');	
 		if(UserMove.from != SQUARES.NO_SQ) {
-			UserMove.to = ClickedSquare(e.pageX, e.pageY);
+			UserMove.to = ClickedSquare(e.originalEvent.touches[0].pageX, e.originalEvent.touches[0].pageY);
 			MakeUserMove();
 		}
 	}
@@ -226,7 +228,7 @@ $(document).on('touchstart','.Square', function (e) {
 	//use jetpack
 	if(hasJetpack){
 //		if(UserMove.from != SQUARES.NO_SQ) {
-			UserMove.to = ClickedSquare(e.pageX, e.pageY);
+			UserMove.to = ClickedSquare(e.originalEvent.touches[0].pageX, e.originalEvent.touches[0].pageY);
 			var rank = RanksBrd[UserMove.to] + 1;
 			var file = FilesBrd[UserMove.to] + 1;
 			frStr = ".Square"+".rank"+rank + ".file"+file;
@@ -239,6 +241,7 @@ $(document).on('touchstart','.Square', function (e) {
 });
 
 $(document).on('click','.Square', function (e) {
+	e.stopPropagation(); e.preventDefault();
 	//gunter - umschließende if anweisung
 	if(!hasMissile && !hasJetpack){
 		$(".markedField").removeClass("markedField");
